@@ -1,0 +1,48 @@
+/* STORIES */
+.stories {
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.story {
+  border: 1px solid black;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* SUPPORT */
+.support {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.box {
+  border: 2px solid black;
+  padding: 20px;
+  width: 150px;
+}
+
+/* CARE */
+.care {
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.links a {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
