@@ -16,6 +16,7 @@
         try {
             await logout();
             statusText.textContent = "You have been logged out.";
+            localStorage.removeItem("isLoggedIn");
             setTimeout(() => {
             window.location.href = "index.html";
             }, 1000);

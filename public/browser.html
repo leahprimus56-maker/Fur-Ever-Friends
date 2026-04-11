@@ -9,29 +9,32 @@
 </head>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
-
     body {
         margin: 0;
         font-family: "Times New Roman", serif;
         background: #ffffff;
         color: #1F3A5F;
+        overflow-x: hidden;
     }
 
     .hero {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 50px 20px;
-        background: #ffffff;
         gap: 10px;
+        background: #ffffff;
+        z-index: -1;
     }
 
     .hero-text {
         flex: 1;
         font-family: "Open Sans", sans-serif;
+        padding-left: 120px;
     }
 
     .hero-text h1 {
@@ -44,7 +47,7 @@
     .hero-text p {
         font-size: 16px;
         color: #6B7280;
-        max-width: 500px;
+        max-width: 600px;
         line-height: 1.5;
     }
 
@@ -60,7 +63,14 @@
         max-width: 450px;
         border-radius: 12px;
         object-fit: cover;
-    }  /*discuss with group abt hero should be the same for everyone - hero, nav, footer, colours change maybe*/
+    }
+
+    .content {
+        position: relative;
+        background: white;
+        margin-top: 100vh; /* pushes content below hero */
+        padding: 50px 20px;
+    }
 
     .controls {
         padding: 15px;
@@ -258,6 +268,25 @@
         margin-bottom: 20px;
         color: #555;
     }
+
+    .scroll-buttons {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .scroll-buttons button {
+        padding: 10px 14px;
+        font-size: 18px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        background: #1F3A5F;
+        color: white;
+    }
 </style>
 
 <body>
@@ -293,119 +322,119 @@
         </div>
 
         <div class="hero-image">
-            <img src="https://www.shutterstock.com/image-vector/set-different-breeds-cats-dogs-260nw-2736596075.jpg">
+            <img src="https://thumbs.dreamstime.com/b/cat-dog-hugging-each-other-hearts-their-chests-concept-love-affection-two-animals-366426047.jpg">
         </div>
     </div>
 
-    <div class="controls">
-        <div class="top-bar">
-            <div class="left-controls">
-                <span>Select:</span>
-                <button onclick="loadData('dog')">Dogs</button>
-                <span>or</span>
-                <button onclick="loadData('cat')">Cats</button>
+    <div class="content">
+        <div class="scroll-buttons">
+            <button id="toTop">⬆</button>
+            <button id="toBottom">⬇</button>
+        </div>
+        <div class="controls">
+            <div class="top-bar">
+                <div class="left-controls">
+                    <span>Select:</span>
+                    <button onclick="loadData('dog')">Dogs</button>
+                    <span>or</span>
+                    <button onclick="loadData('cat')">Cats</button>
+                </div>
+
+                <div class="right-controls">
+                    <input type="text" id="search" placeholder="🔍 Search by breed..." oninput="render()">
+                </div>
             </div>
 
-            <div class="right-controls">
-                <input type="text" id="search" placeholder="🔍 Search by breed..." oninput="render()">
+            <div id="catFilters" style="display:none;">
+                <p>Affection Level
+                    <button onclick="setCatFilter('affection', 1)">1</button>
+                    <button onclick="setCatFilter('affection', 2)">2</button>
+                    <button onclick="setCatFilter('affection', 3)">3</button>
+                    <button onclick="setCatFilter('affection', 4)">4</button>
+                    <button onclick="setCatFilter('affection', 5)">5</button></p>
+
+                <p>Energy Level
+                    <button onclick="setCatFilter('energy', 1)">1</button>
+                    <button onclick="setCatFilter('energy', 2)">2</button>
+                    <button onclick="setCatFilter('energy', 3)">3</button>
+                    <button onclick="setCatFilter('energy', 4)">4</button>
+                    <button onclick="setCatFilter('energy', 5)">5</button>
+
+                    <br>
+                <button class="reset-btn" onclick="clearCatFilter()">Reset All</button></p>
+            </div>
+
+            <div id="dogFilters" style="display:none;">
+                <p>Breed Group
+                    <button onclick="setDogFilter('Toy')">Toy</button>
+                    <button onclick="setDogFilter('Working')">Working</button>
+                    <button onclick="setDogFilter('Sporting')">Sporting</button>
+                    <button onclick="setDogFilter('Hound')">Hound</button>
+                    <button onclick="setDogFilter('Terrier')">Terrier</button>
+                    <button onclick="setDogFilter('Non-Sporting')">Non-Sporting</button>
+                    <button onclick="setDogFilter('Herding')">Herding</button>
+
+                <button class="reset-btn" onclick="clearDogFilter()">Reset</button></p>
             </div>
         </div>
 
-        <div id="catFilters" style="display:none;">
-            <p>Affection Level
-                <button onclick="setCatFilter('affection', 1)">1</button>
-                <button onclick="setCatFilter('affection', 2)">2</button>
-                <button onclick="setCatFilter('affection', 3)">3</button>
-                <button onclick="setCatFilter('affection', 4)">4</button>
-                <button onclick="setCatFilter('affection', 5)">5</button></p>
+        <div class="main-layout">
+            <div id="gallery"></div>
 
-            <p>Energy Level
-                <button onclick="setCatFilter('energy', 1)">1</button>
-                <button onclick="setCatFilter('energy', 2)">2</button>
-                <button onclick="setCatFilter('energy', 3)">3</button>
-                <button onclick="setCatFilter('energy', 4)">4</button>
-                <button onclick="setCatFilter('energy', 5)">5</button>
-
-                <br>
-            <button class="reset-btn" onclick="clearCatFilter()">Reset All</button></p>
+            <div id="favoritesSidebar" class="sidebar">
+                <h3>❤️ Favourites ❤️</h3>
+                <div id="favouritesList"></div>
+            </div>
         </div>
 
-        <div id="dogFilters" style="display:none;">
-            <p>Breed Group
-                <button onclick="setDogFilter('Toy')">Toy</button>
-                <button onclick="setDogFilter('Working')">Working</button>
-                <button onclick="setDogFilter('Sporting')">Sporting</button>
-                <button onclick="setDogFilter('Hound')">Hound</button>
-                <button onclick="setDogFilter('Terrier')">Terrier</button>
-                <button onclick="setDogFilter('Non-Sporting')">Non-Sporting</button>
-                <button onclick="setDogFilter('Herding')">Herding</button>
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-content" id="loginPromptModal">
+                <button class="close-modal" onclick="closeLoginPopup()">&times;</button>
 
-            <button class="reset-btn" onclick="clearDogFilter()">Reset</button></p>
+                <div class="animated-icon">
+                <img src="https://gifdb.com/images/high/emotional-animated-sad-cat-crying-xnjwe8111peepx20.gif" alt="Sad Pug">
+                </div>
+
+                <h3>Login Required</h3>
+                <p>You must be logged in to save to favourites.</p>
+
+                <div class="modal-actions">
+                <button class="modal-login-btn" onclick="goToLogin()">Log In</button>
+                <button class="modal-signup-btn" onclick="closeLoginPopup()">Cancel</button>
+                </div>
+            </div>
         </div>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section brand">
+                <h2 class="brand-name">Fur-Ever Friends</h2>
+                <p>Finding you your purrfect fur-ever friend!</p>
+                </div>
+                
+                <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="supportus.html">Support Us</a></li>
+                </ul>
+                </div>
+
+                <div class="footer-section contact">
+                <h3>Contact</h3>
+                    <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
+                    <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
+                    <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
+                    <p>Location: Trinidad & Tobago</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
-
-    <div class="main-layout">
-        <div id="gallery"></div>
-
-        <div id="favoritesSidebar" class="sidebar">
-            <h3>❤️ Favourites ❤️</h3>
-            <div id="favouritesList"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content" id="loginPromptModal">
-            <button class="close-modal" onclick="closeLoginPopup()">&times;</button>
-
-            <div class="animated-icon">
-            <img src="https://gifdb.com/images/high/emotional-animated-sad-cat-crying-xnjwe8111peepx20.gif" alt="Sad Pug">
-            </div>
-
-            <h3>Login Required</h3>
-            <p>You must be logged in to save to favourites.</p>
-
-            <div class="modal-actions">
-            <button class="modal-login-btn" onclick="goToLogin()">Log In</button>
-            <button class="modal-signup-btn" onclick="closeLoginPopup()">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-section brand">
-            <h2 class="brand-name">Fur-Ever Friends</h2>
-            <p>Finding you your purrfect fur-ever friend!</p>
-            </div>
-            
-            <div class="footer-section links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="supportus.html">Support Us</a></li>
-            </ul>
-            </div>
-
-            <div class="footer-section contact">
-            <h3>Contact</h3>
-            <p>Email: furever.friends@gmail.com</p>
-            <p>Location: Trinidad & Tobago</p>
-            </div>
-        </div>
-
-        <div class="footer-section contact">
-        <h3>Contact</h3>
-            <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
-            <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
-            <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
-            <p>Location: Trinidad & Tobago</p>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 
 <script type="module">
@@ -639,16 +668,16 @@
 
     function toggleFavorite(pet) {
         if (!loggedIn) {
-        openLoginPopup();
+            openLoginPopup();
             return;
         }
 
-        const index = favorites.findIndex(f => f.id === pet.id);
-        if (index === -1) {
-            favorites.push(pet);
-        } else {
-            favorites.splice(index, 1);
+        const exists = favorites.some(f => f.id === pet.id);
+        if (exists) {
+            return;
         }
+
+        favorites.push(pet);
         renderFavorites();
     }
 
@@ -698,6 +727,19 @@
             closeLoginPopup();
         }
     });
+
+    const hero = document.querySelector(".hero");
+    window.addEventListener("scroll", () => {
+        hero.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    });
+
+    document.getElementById("toTop").onclick = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    document.getElementById("toBottom").onclick = () => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    };
 
     window.loadData = loadData;
     window.render = render;
