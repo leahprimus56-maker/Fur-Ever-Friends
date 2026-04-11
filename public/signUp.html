@@ -168,6 +168,7 @@
         try {
             await signUp(email, password);
             alert("Account created successfully!");
+            window.location.href = "index.html";
         } catch (error) {
             alert("Sign up failed: " + error.message);
         }
