@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adopt - Fur-Ever Friends</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">
+    <img src="Fur-Ever Friends.png" alt="Logo">
+    <span class="brand-name">Fur-Ever Friends</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="javascript:void(0)" style="cursor: default; opacity: 0.7;">Browse</a></li>
+    <li><a href="#browse-pets" id="adoptNav">Adopt</a></li>
+    <li><a href="supportus.html">Support Us</a></li>
+    <li><a href="aboutus.html">About Us</a></li>
+</ul>
+
+
+  <div class="nav-actions">
+    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
+  </div>
+</nav>
+
+<section class="hero-banner">
+
+  <section class="adopt-hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>Adopt, Don't Shop</h1>
+      <p>Give a forever home to a furry friend in need.</p>
+      <button class="cta-button" onclick="document.getElementById('adoptNav').click()">View Pets</button>
+    </div>
+  </div>
+</section>
+
+
+  <div class="how-it-works-row">
+    <div class="step-card">
+      <div class="step-icon">01</div>
+      <h3>Find Your Pet</h3>
+      <p>Browse through a variety of adorable pets looking for a loving home.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">02</div>
+      <h3>Know Your Pet</h3>
+      <p>Learn important details about your chosen pet, including behavior and needs.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-icon">03</div>
+      <h3>Take Your Pet Home</h3>
+      <p>Complete the adoption process and welcome your new friend.</p>
+    </div>
+  </div>
+
+</section>
+
+<div class="filter-container">
+  <h2>Browse Pets</h2>
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="dog">Dogs</button>
+    <button class="filter-btn" data-filter="cat">Cats</button>
+  </div>
+</div>
+
+<div id="browse-pets" class="pets-grid"></div>
+
+<div class="pagination">
+  <button onclick="prevPage()">⬅ Previous</button>
+  <span id="pageInfo"></span>
+  <button onclick="nextPage()">Next ➡</button>
+</div>
+
+<footer class="site-footer">
+
+  <div class="footer-content">
+
+    <div class="footer-section brand">
+      <h2 class="brand-name">Fur-Ever Friends</h2>
+      <p>Finding you your purrfect fur-ever friend!</p>
+    </div>
+
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="supportus.html">Support Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section contact">
+      <h3>Contact</h3>
+      <p>Email: furever.friends@gmail.com</p>
+      <p>Location: Trinidad & Tobago</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+  </div>
+
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+
+  <div class="modal-content" id="loginPromptModal">
+    <button class="close-modal">&times;</button>
+
+    <div class="animated-icon">
+      <img src="https://media1.tenor.com/images/60ac021c250b833cdd9f39fede126ef3/tenor.gif">
+    </div>
+
+    <h3>Hold On, Friend!</h3>
+    <p>You need an account to continue.</p>
+
+    <div class="modal-actions">
+      <button class="modal-login-btn">Log In</button>
+      <button class="modal-signup-btn">Sign Up</button>
+    </div>
+  </div>
+
+</div>
+
+<script type="module"  src="app.js"></script>
+</body>
+</html>
+
