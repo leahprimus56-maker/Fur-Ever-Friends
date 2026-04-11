@@ -18,15 +18,21 @@
         font-family: "Times New Roman", serif;
         background: #ffffff;
         color: #1F3A5F;
+        overflow-x: hidden;
     }
 
     .hero {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 50px 20px;
+        gap: 5px;
         background: #ffffff;
-        gap: 10px;
+        z-index: -1;
     }
 
     .hero-text {
@@ -60,7 +66,14 @@
         max-width: 450px;
         border-radius: 12px;
         object-fit: cover;
-    }  /*discuss with group abt hero should be the same for everyone - hero, nav, footer, colours change maybe*/
+    }
+
+    .content {
+        position: relative;
+        background: white;
+        margin-top: 100vh; /* pushes content below hero */
+        padding: 50px 20px;
+    }
 
     .controls {
         padding: 15px;
@@ -293,10 +306,11 @@
         </div>
 
         <div class="hero-image">
-            <img src="https://www.shutterstock.com/image-vector/set-different-breeds-cats-dogs-260nw-2736596075.jpg">
+            <img src="https://thumbs.dreamstime.com/b/cat-dog-hugging-each-other-hearts-their-chests-concept-love-affection-two-animals-366426047.jpg">
         </div>
     </div>
 
+    <div class="content">
     <div class="controls">
         <div class="top-bar">
             <div class="left-controls">
@@ -389,23 +403,18 @@
 
             <div class="footer-section contact">
             <h3>Contact</h3>
-            <p>Email: furever.friends@gmail.com</p>
-            <p>Location: Trinidad & Tobago</p>
+                <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
+                <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
+                <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
+                <p>Location: Trinidad & Tobago</p>
             </div>
-        </div>
-
-        <div class="footer-section contact">
-        <h3>Contact</h3>
-            <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
-            <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
-            <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
-            <p>Location: Trinidad & Tobago</p>
         </div>
 
         <div class="footer-bottom">
             <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
         </div>
     </footer>
+    </div>
 </body>
 
 <script type="module">
@@ -639,16 +648,16 @@
 
     function toggleFavorite(pet) {
         if (!loggedIn) {
-        openLoginPopup();
+            openLoginPopup();
             return;
         }
 
-        const index = favorites.findIndex(f => f.id === pet.id);
-        if (index === -1) {
-            favorites.push(pet);
-        } else {
-            favorites.splice(index, 1);
+        const exists = favorites.some(f => f.id === pet.id);
+        if (exists) {
+            return;
         }
+
+        favorites.push(pet);
         renderFavorites();
     }
 
@@ -697,6 +706,11 @@
         if (e.target === this) {
             closeLoginPopup();
         }
+    });
+
+    const hero = document.querySelector(".hero");
+    window.addEventListener("scroll", () => {
+        hero.style.transform = `translateY(${window.scrollY * 0.3}px)`;
     });
 
     window.loadData = loadData;
