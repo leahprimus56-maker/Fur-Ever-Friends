@@ -121,7 +121,6 @@ function filterPets(type) {
   displayPets();
 }
 
-// 🔹 DISPLAY PETS
 function displayPets() {
   const container = document.getElementById("browse-pets");
   if (!container) return;
