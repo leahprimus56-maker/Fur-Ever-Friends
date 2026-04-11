@@ -160,6 +160,7 @@
         try {
             await login(email, password);
             alert("Login successful!");
+            window.history.back();
         } catch (error) {
             alert("Login failed: " + error.message);
         }
