@@ -1,32 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>Fur-Ever Friends</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- Home -->
-<section class="home">
-  <div>
-    <h1>Find your favourite type now!</h1>
-    <p>See our catalog of cat & dog breeds.</p>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div>LOGO</div>
+
+  <div class="nav-links">
+    Home | Browse | Adopt | Support Us | About Us | Login
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="home">
+  <div class="home-left">
+    <h2>Find your favourite type now!</h2>
+    <p>See our catalog of cat & dog breeds</p>
     <button onclick="scrollToPets()">Browse</button>
   </div>
 
-  <div class="home-img"></div>
-</section>
+  <div class="home-right">
+    IMAGE
+  </div>
+</div>
 
-<!-- SIGNUP -->
-<section class="signup">
-  <h2>Become a member today</h2>
+<!-- SIGN UP -->
+<div class="signup">
+  <h3>Become a member today</h3>
   <button onclick="signup()">Sign Up ></button>
-</section>
+</div>
 
-<!-- FEATURED PETS -->
-<section id="featured" class="featured">
-  <h2>Featured Pets (Gallery)</h2>
+<!-- FEATURED -->
+<div class="featured" id="featured">
+  <h3>Featured Pets (Gallery)</h3>
 
   <div class="carousel">
     <button onclick="prev()">⬅</button>
@@ -36,62 +47,64 @@
     <button onclick="next()">➡</button>
   </div>
 
-  <button class="learn-btn">Learn More</button>
-</section>
+  <button>Learn More</button>
+</div>
 
-<!-- STORIES (DROPDOWN) -->
-<section class="stories">
-  <h2>Top Adoption Stories</h2>
+<!-- STORIES -->
+<div class="stories">
+  <h3>Top Adoption Stories</h3>
 
   <div class="story" onclick="toggleStory(this)">
     Story 1
-    <p class="hidden">A rescued dog found a loving home.</p>
+    <div class="hidden">Details...</div>
   </div>
 
   <div class="story" onclick="toggleStory(this)">
     Story 2
-    <p class="hidden">A kitten was adopted within days.</p>
+    <div class="hidden">Details...</div>
   </div>
 
   <div class="story" onclick="toggleStory(this)">
     Story 3
-    <p class="hidden">A senior pet got a second chance.</p>
+    <div class="hidden">Details...</div>
   </div>
-</section>
+</div>
 
 <!-- SUPPORT -->
-<section id="support" class="support">
+<div class="support">
   <div class="box">
-    <h3>Adopt</h3>
-    <p>Find your perfect pet companion.</p>
-    <button onclick="alert('Adopt page coming soon')">Learn More</button>
+    <p>Adopt</p>
+    <button onclick="alert('Adopt')">Learn More</button>
   </div>
 
   <div class="box">
-    <h3>Donate</h3>
-    <p>Help us rescue more animals.</p>
-    <button onclick="alert('Donate page coming soon')">Learn More</button>
+    <p>Donate</p>
+    <button onclick="alert('Donate')">Learn More</button>
   </div>
 
   <div class="box">
-    <h3>Volunteer</h3>
-    <p>Join our mission.</p>
-    <button onclick="alert('Volunteer page coming soon')">Learn More</button>
+    <p>Volunteer</p>
+    <button onclick="alert('Volunteer')">Learn More</button>
   </div>
-</section>
+</div>
 
 <!-- CARE -->
-<section id="care" class="care">
-  <h2>How to care for a pet?</h2>
+<div class="care">
+  <h3>How to care for a pet?</h3>
 
   <div class="links">
-    <a href="#">Feeding Guide</a>
-    <a href="#">Training Tips</a>
-    <a href="#">Health Care</a>
-    <a href="#">Grooming</a>
+    <div>Link</div>
+    <div>Link</div>
+    <div>Link</div>
+    <div>Link</div>
   </div>
-</section>
+</div>
 
+<!-- FOOTER -->
+<div class="footer">
+  <p>Fur-Ever Friends | Contact Info | Social Media</p>
+</div>
 
+<script src="script.js"></script>
 </body>
 </html>
