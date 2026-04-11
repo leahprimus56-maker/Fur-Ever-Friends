@@ -160,7 +160,7 @@
         try {
             await login(email, password);
             alert("Login successful!");
-            window.location.href = "index.html";
+            window.history.back();
         } catch (error) {
             alert("Login failed: " + error.message);
         }
