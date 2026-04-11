@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+</head>
+<body>
+    <p id="status">Logging out...</p>
+
+    <script type="module">
+        import { logout } from "./auth.js";
+        const statusText = document.getElementById("status");
+
+        async function handleLogout() {
+        try {
+            await logout();
+            statusText.textContent = "You have been logged out.";
+            setTimeout(() => {
+            window.location.href = "login.html";
+            }, 1000);
+        } catch (error) {
+            statusText.textContent = "Error logging out: " + error.message;
+        }
+        }
+
+        handleLogout();
+    </script>
+</body>
+</html>
