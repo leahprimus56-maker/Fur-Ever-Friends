@@ -50,7 +50,8 @@
   padding-bottom: 5px;
 }
 
-.login-btn,.logout-btn {
+.logout-btn,
+.login-btn {
   padding: 10px 25px;
   background-color: #b8a4d4;
   color: black;
@@ -62,7 +63,8 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-btn:hover,.logout-btn:hover{
+.logout-btn:hover,
+.login-btn:hover {
   background-color: #6B7280;
   transform: translateY(-1px);
 }
