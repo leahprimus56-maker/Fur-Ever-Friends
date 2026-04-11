@@ -678,74 +678,6 @@ font-family: 'Accent-Pacifico', cursive;
 </footer>
 
 <script>
-  /*let isLoggedIn = false; 
-
-  const volunteerForm = document.getElementById('volunteerForm');
-  const donationForm = document.getElementById('donationForm');
-  
-  const modalOverlay = document.getElementById('modalOverlay');
-  const loginPromptModal = document.getElementById('loginPromptModal');
-  const thankYouModal = document.getElementById('thankYouModal');
-  const thankYouMessage = document.getElementById('thankYouMessage');
-  const closeButtons = document.querySelectorAll('.close-modal');
-
-  volunteerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    handleFormSubmission('volunteering');
-  });
-
-  donationForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    handleFormSubmission('donating');
-  });
-
-  function handleFormSubmission(type) {
-    modalOverlay.style.display = 'flex';
-
-    if (!isLoggedIn) {
-      loginPromptModal.style.display = 'block';
-      thankYouModal.style.display = 'none';
-    } else {
-      loginPromptModal.style.display = 'none';
-      thankYouModal.style.display = 'block';
-
-      if (type === 'volunteering') {
-        thankYouMessage.innerText = 'Thank you for volunteering! Your big heart makes a big difference.';
-      } else {
-        thankYouMessage.innerText = 'Thank you for donating! Your gift directly helps a pet on their path home.';
-      }
-
-      setTimeout(closeModal, 4000);
-    }
-  }
-
-  function closeModal() {
-    modalOverlay.style.display = 'none';
-    loginPromptModal.style.display = 'none';
-    thankYouModal.style.display = 'none';
-  }
-
-  closeButtons.forEach(btn => {
-    btn.addEventListener('click', closeModal);
-  });
-
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === modalOverlay) {
-      closeModal();
-    }
-  });
-
-  document.querySelector('.modal-login-btn').addEventListener('click', () => {
-    alert('Simulating redirect to Login page...');
-    closeModal();
-  });
-  document.querySelector('.modal-signup-btn').addEventListener('click', () => {
-    alert('Simulating redirect to Signup page...');
-    closeModal();
-  });*/
-
-  // 1. Check if the user is logged in via localStorage
-  // Your login page should set: localStorage.setItem("isLoggedIn", "true");
   let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
 
   const volunteerForm = document.getElementById('volunteerForm');
@@ -756,7 +688,6 @@ font-family: 'Accent-Pacifico', cursive;
   const thankYouMessage = document.getElementById('thankYouMessage');
   const closeButtons = document.querySelectorAll('.close-modal');
 
-  // Handle Form Submissions
   volunteerForm.addEventListener('submit', function(e) {
     e.preventDefault();
     handleFormSubmission('volunteering');
@@ -771,23 +702,18 @@ font-family: 'Accent-Pacifico', cursive;
     modalOverlay.style.display = 'flex';
 
     if (!isLoggedIn) {
-      // Show "Hold On" Modal if not logged in
       loginPromptModal.style.display = 'block';
       thankYouModal.style.display = 'none';
     } else {
-      // LOGGED IN FLOW
       loginPromptModal.style.display = 'none';
       thankYouModal.style.display = 'block';
 
       if (type === 'volunteering') {
         thankYouMessage.innerText = 'Thank you for volunteering! Your big heart makes a big difference.';
-        // Optional: Add code here to send volunteerForm data to your database
       } else {
         thankYouMessage.innerText = 'Thank you for donating! Your gift directly helps a pet on their path home.';
-        // Optional: Add code here to process payment or save donation info
       }
 
-      // Auto-close success message after 4 seconds
       setTimeout(closeModal, 4000);
     }
   }
@@ -798,7 +724,6 @@ font-family: 'Accent-Pacifico', cursive;
     thankYouModal.style.display = 'none';
   }
 
-  // Close modal logic
   closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
   modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
 
