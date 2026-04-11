@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browser</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <style>
@@ -259,6 +261,26 @@
 </style>
 
 <body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="Fur-Ever Friends.png" alt="Fur-Ever Friends Logo">
+            <span class="brand-name">Fur-Ever Friends</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="browse.html" class="active">Browse</a></li>
+            <li><a href="adopt.html">Adopt</a></li>
+            <li><a href="supportus.html">Support Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="login-btn">Login</button>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
     <div class="hero">
         <div class="hero-text">
             <h1>Learn About the Different Breeds of Dogs and Cats!</h1>
@@ -340,6 +362,34 @@
             <button class="reset-btn" onclick="closeLoginPopup()">Cancel</button>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section brand">
+            <h2 class="brand-name">Fur-Ever Friends</h2>
+            <p>Finding you your purrfect fur-ever friend!</p>
+            </div>
+            
+            <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="supportus.html">Support Us</a></li>
+            </ul>
+            </div>
+
+            <div class="footer-section contact">
+            <h3>Contact</h3>
+            <p>Email: furever.friends@gmail.com</p>
+            <p>Location: Trinidad & Tobago</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 <script type="module">
