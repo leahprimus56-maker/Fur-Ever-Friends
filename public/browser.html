@@ -353,13 +353,21 @@
         </div>
     </div>
 
-    <div id="loginPopup" class="popup">
-        <div class="popup-content">
-            <h2>Login Required</h2>
-            <p>You must be logged in to save favorites.</p>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="loginPromptModal">
+            <button class="close-modal" onclick="closeLoginPopup()">&times;</button>
 
-            <button onclick="goToLogin()">Login</button>
-            <button class="reset-btn" onclick="closeLoginPopup()">Cancel</button>
+            <div class="animated-icon">
+            <img src="https://gifdb.com/images/high/emotional-animated-sad-cat-crying-xnjwe8111peepx20.gif" alt="Sad Pug">
+            </div>
+
+            <h3>Login Required</h3>
+            <p>You must be logged in to save to favourites.</p>
+
+            <div class="modal-actions">
+            <button class="modal-login-btn" onclick="goToLogin()">Log In</button>
+            <button class="modal-signup-btn" onclick="closeLoginPopup()">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -384,6 +392,14 @@
             <p>Email: furever.friends@gmail.com</p>
             <p>Location: Trinidad & Tobago</p>
             </div>
+        </div>
+
+        <div class="footer-section contact">
+        <h3>Contact</h3>
+            <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
+            <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
+            <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
+            <p>Location: Trinidad & Tobago</p>
         </div>
 
         <div class="footer-bottom">
@@ -623,7 +639,7 @@
 
     function toggleFavorite(pet) {
         if (!loggedIn) {
-        showLoginPopup();
+        openLoginPopup();
             return;
         }
 
@@ -668,14 +684,20 @@
         renderFavorites();
     }
 
-    function showLoginPopup() {
-        const popup = document.getElementById("loginPopup");
-        popup.style.display = "flex";
+    function openLoginPopup() {
+        document.getElementById("modalOverlay").style.display = "flex";
     }
 
     function closeLoginPopup() {
-        document.getElementById("loginPopup").style.display = "none";
+        document.getElementById("modalOverlay").style.display = "none";
     }
+
+    const overlay = document.getElementById("modalOverlay");
+    overlay.addEventListener("click", function(e) {
+        if (e.target === this) {
+            closeLoginPopup();
+        }
+    });
 
     window.loadData = loadData;
     window.render = render;
