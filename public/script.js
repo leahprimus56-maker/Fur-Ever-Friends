@@ -1,5 +1,39 @@
 import { setAuthUsers } from "./auth.js";
 
+import { logout } from "./auth.js";
+
+import { login } from "./auth.js";
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        await login(email, password);
+
+        alert("Login successful!");
+
+        window.location.href = "index.html";
+
+    } catch (error) {
+        alert("Login failed: " + error.message);
+    }
+});
+
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+loginBtn.addEventListener("click", () => {
+  window.location.href = "login.html";
+});
+
+logoutBtn.addEventListener("click", async () => {
+  await logout();
+  window.location.href = "index.html";
+});
+
 let petsData = [];
 let filteredPets = [];
 let currentPage = 1;
