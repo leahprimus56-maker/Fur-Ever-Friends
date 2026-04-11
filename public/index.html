@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fur-Ever Friends</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div>LOGO</div>
+
+  <div class="nav-links">
+    Home | Browse | Adopt | Support Us | About Us | Login
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="home">
+  <div class="home-left">
+    <h2>Find your favourite type now!</h2>
+    <p>See our catalog of cat & dog breeds</p>
+    <button onclick="scrollToPets()">Browse</button>
+  </div>
+
+  <div class="home-right">
+    IMAGE
+  </div>
+</div>
+
+<!-- SIGN UP -->
+<div class="signup">
+  <h3>Become a member today</h3>
+  <button onclick="signup()">Sign Up ></button>
+</div>
+
+<!-- FEATURED -->
+<div class="featured" id="featured">
+  <h3>Featured Pets (Gallery)</h3>
+
+  <div class="carousel">
+    <button onclick="prev()">⬅</button>
+
+    <div id="pet-container"></div>
+
+    <button onclick="next()">➡</button>
+  </div>
+
+  <button>Learn More</button>
+</div>
+
+<!-- STORIES -->
+<div class="stories">
+  <h3>Top Adoption Stories</h3>
+
+  <div class="story" onclick="toggleStory(this)">
+    Story 1
+    <div class="hidden">Details...</div>
+  </div>
+
+  <div class="story" onclick="toggleStory(this)">
+    Story 2
+    <div class="hidden">Details...</div>
+  </div>
+
+  <div class="story" onclick="toggleStory(this)">
+    Story 3
+    <div class="hidden">Details...</div>
+  </div>
+</div>
+
+<!-- SUPPORT -->
+<div class="support">
+  <div class="box">
+    <p>Adopt</p>
+    <button onclick="alert('Adopt')">Learn More</button>
+  </div>
+
+  <div class="box">
+    <p>Donate</p>
+    <button onclick="alert('Donate')">Learn More</button>
+  </div>
+
+  <div class="box">
+    <p>Volunteer</p>
+    <button onclick="alert('Volunteer')">Learn More</button>
+  </div>
+</div>
+
+<!-- CARE -->
+<div class="care">
+  <h3>How to care for a pet?</h3>
+
+  <div class="links">
+    <div>Link</div>
+    <div>Link</div>
+    <div>Link</div>
+    <div>Link</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Fur-Ever Friends | Contact Info | Social Media</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
