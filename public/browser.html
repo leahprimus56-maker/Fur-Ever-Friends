@@ -639,16 +639,16 @@
 
     function toggleFavorite(pet) {
         if (!loggedIn) {
-        openLoginPopup();
+            openLoginPopup();
             return;
         }
 
-        const index = favorites.findIndex(f => f.id === pet.id);
-        if (index === -1) {
-            favorites.push(pet);
-        } else {
-            favorites.splice(index, 1);
+        const exists = favorites.some(f => f.id === pet.id);
+        if (exists) {
+            return;
         }
+
+        favorites.push(pet);
         renderFavorites();
     }
 
