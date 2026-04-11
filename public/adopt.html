@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Adopt - Fur-Ever Friends</title>
+  <link rel="stylesheet" href="style.css">
 </head>
   <style>
 
@@ -509,25 +510,25 @@ flex-direction: column;
 
 <body>
 
-<nav class="navbar">
-  <div class="nav-logo">
-    <img src="Fur-Ever Friends.png" alt="Logo">
-    <span class="brand-name">Fur-Ever Friends</span>
-  </div>
+  <nav class="navbar">
+        <div class="nav-logo">
+            <img src="icon/Fur-Ever Friends.png" alt="Fur-Ever Friends Logo">
+            <span class="brand-name">Fur-Ever Friends</span>
+        </div>
 
-  <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="javascript:void(0)" style="cursor: default; opacity: 0.7;">Browse</a></li>
-    <li><a href="#browse-pets" id="adoptNav">Adopt</a></li>
-    <li><a href="supportus.html">Support Us</a></li>
-    <li><a href="aboutus.html">About Us</a></li>
-</ul>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="browser.html">Browser</a></li>
+            <li><a href="adopt.html" class="active">Adopt</a></li>
+            <li><a href="supportus.html">Support Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+        </ul>
 
-
-  <div class="nav-actions">
-    <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-  </div>
-</nav>
+        <div class="nav-actions">
+            <button class="login-btn" onclick="location.href='login.html';">Login</button>
+            <button class="logout-btn" onclick="location.href='logout.html';">Logout</button>
+        </div>
+    </nav>
 
 <section class="hero-banner">
 
@@ -633,9 +634,9 @@ flex-direction: column;
 
 </div>
 
-<script>
+<script type="module">
   
-  import { setAuthUsers } from "./auth.js";
+import { setAuthUsers } from "./auth.js";
 
 import { logout } from "./auth.js";
 
