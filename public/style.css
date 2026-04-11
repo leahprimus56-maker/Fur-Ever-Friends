@@ -224,12 +224,17 @@
 }
 
 .modal-login-btn {
-  background-color: #eee;
-  color: #333;
+  background-color: #1F3A5F;
+  color: white;
 }
 
 .modal-signup-btn {
   background-color: #1F3A5F; 
+  color: white;
+}
+
+.modal-cancel-btn {
+  background-color: #ee758d;
   color: white;
 }
 
