@@ -159,6 +159,7 @@
 
         try {
             await login(email, password);
+            localStorage.setItem("isLoggedIn", "true"); 
             alert("Login successful!");
             window.history.back();
         } catch (error) {
