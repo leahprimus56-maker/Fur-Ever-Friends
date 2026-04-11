@@ -31,6 +31,7 @@
   list-style: none;
   display: flex;
   gap: 45px;
+  font-family: 'Segoe UI', 'sans-serif';
 }
 
 .nav-links a {
@@ -61,7 +62,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-btn,.logout-btn:hover {
+.login-btn:hover,.logout-btn:hover{
   background-color: #6B7280;
   transform: translateY(-1px);
 }
@@ -138,7 +139,6 @@
   color: #6B7280;
 }
 
-/* Responsive adjustment for mobile */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
