@@ -1,13 +1,75 @@
+body {
+  font-family: Arial;
+}
+
+/* NAVBAR */
+.navbar {
+  border: 2px solid black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* HERO */
+.hero {
+  border: 2px solid black;
+  display: flex;
+  padding: 20px;
+}
+
+.hero-left {
+  width: 50%;
+}
+
+.hero-right {
+  width: 50%;
+  border: 2px solid black;
+  text-align: center;
+  padding: 40px;
+}
+
+/* SIGNUP */
+.signup {
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+/* FEATURED */
+.featured {
+  border: 2px solid black;
+  text-align: center;
+  padding: 20px;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pet-container {
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+}
+
+.pet {
+  border: 2px solid black;
+  width: 80px;
+  height: 80px;
+}
+
 /* STORIES */
 .stories {
-  padding: 20px;
   border: 2px solid black;
+  padding: 10px;
 }
 
 .story {
   border: 1px solid black;
-  margin: 10px 0;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   cursor: pointer;
 }
 
@@ -17,32 +79,38 @@
 
 /* SUPPORT */
 .support {
+  border: 2px solid black;
   display: flex;
   justify-content: space-around;
-  padding: 20px;
-  border: 2px solid black;
+  padding: 10px;
 }
 
 .box {
   border: 2px solid black;
-  padding: 20px;
-  width: 150px;
+  padding: 10px;
 }
 
 /* CARE */
 .care {
-  padding: 20px;
   border: 2px solid black;
+  padding: 10px;
 }
 
 .links {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 5px;
 }
 
-.links a {
+.links div {
   border: 1px solid black;
   padding: 10px;
   text-align: center;
+}
+
+/* FOOTER */
+.footer {
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
 }
