@@ -11,7 +11,7 @@
 <style>
     body {
         margin: 0;
-        font-family: "Times New Roman", serif;
+        font-family: 'Times New Roman', Open Sans, Accent-Pacifico;
         background: #ffffff;
         color: #1F3A5F;
         overflow-x: hidden;
@@ -26,9 +26,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
         background: #ffffff;
-        z-index: -1;
+        z-index: 0;
     }
 
     .hero-text {
@@ -67,9 +66,9 @@
 
     .content {
         position: relative;
+        margin-top: 100vh;
         background: white;
-        margin-top: 100vh; /* pushes content below hero */
-        padding: 50px 20px;
+        z-index: 1;
     }
 
     .controls {
@@ -408,21 +407,21 @@
         <footer class="site-footer">
             <div class="footer-content">
                 <div class="footer-section brand">
-                <h2 class="brand-name">Fur-Ever Friends</h2>
-                <p>Finding you your purrfect fur-ever friend!</p>
+                    <h2 class="brand-name">Fur-Ever Friends</h2>
+                    <p>Finding you your purrfect fur-ever friend!</p>
                 </div>
                 
                 <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="supportus.html">Support Us</a></li>
-                </ul>
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="supportus.html">Support Us</a></li>
+                    </ul>
                 </div>
 
                 <div class="footer-section contact">
-                <h3>Contact</h3>
+                    <h3>Contact</h3>
                     <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
                     <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
                     <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
@@ -726,11 +725,6 @@
         if (e.target === this) {
             closeLoginPopup();
         }
-    });
-
-    const hero = document.querySelector(".hero");
-    window.addEventListener("scroll", () => {
-        hero.style.transform = `translateY(${window.scrollY * 0.3}px)`;
     });
 
     document.getElementById("toTop").onclick = () => {
