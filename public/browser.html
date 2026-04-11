@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Times New Roman", serif;
+        background: #ffffff;
+        color: #1F3A5F;
+    }
+
+    .hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 20px;
+        background: #ffffff;
+        gap: 10px;
+    }
+
+    .hero-text {
+        flex: 1;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .hero-text h1 {
+        font-size: 38px;
+        margin-bottom: 10px;
+        color: #1F3A5F;
+        font-family: "Times New Roman", serif;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+        color: #6B7280;
+        max-width: 500px;
+        line-height: 1.5;
+    }
+
+    .hero-image {
+        flex: 1.2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-image img {
+        width: 100%;
+        max-width: 450px;
+        border-radius: 12px;
+        object-fit: cover;
+    }  /*discuss with group abt hero should be the same for everyone - hero, nav, footer, colours change maybe*/
+
+    .controls {
+        padding: 15px;
+        background: #D6E9FF;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .left-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .right-controls {
+        margin-left: auto;
+    }
+
+    button {
+        padding: 8px 12px;
+        border: none;
+        background: #B8A4D4;
+        color: white;
+        cursor: pointer;
+        margin: 3px;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #8e67c5;
+        color: #1F3A5F;
+    }
+
+    .reset-btn {
+        background: #ee758d;
+    }
+
+    .reset-btn:hover {
+        background: #e74c3c;
+    }
+
+    input {
+        padding: 8px;
+        border: 1px solid #6B7280;
+        border-radius: 5px;
+    }
+
+    #catFilters,
+    #dogFilters {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+    #catFilters p,
+    #dogFilters p {
+        margin: 6px 0;
+    }
+
+    .main-layout {
+        display: flex;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    #gallery {
+        flex: 3;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+    }
+
+    .sidebar { 
+        flex: 1; 
+        background: #F7F4EF; 
+        padding: 10px; 
+        border-left: 2px solid #6B7280; 
+        min-height: 100vh; 
+    } 
+    
+    .sidebar h3 { 
+        margin-top: 0; 
+        color: #1F3A5F; 
+    }
+
+    .fav-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        gap: 10px;
+    }
+
+    .fav-item img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .fav-item p {
+        margin: 0;
+        font-size: 14px;
+        flex: 1;
+    }
+
+    .fav-item button {
+        padding: 4px 8px;
+        border: none;
+        border-radius: 6px;
+        background: #B8A4D4;
+        color: white;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .fav-item button:hover {
+        background: #8e67c5;
+        color: #1F3A5F;
+    }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .card-content {
+        padding: 10px;
+        font-family: "Times New Roman", serif;
+    }
+
+    .card-hover {
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 58, 95, 0.92);
+        color: white;
+        opacity: 0;
+        transition: 0.3s ease;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    .card:hover .card-hover {
+        opacity: 1;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        width: 300px;
+        max-width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .popup-content h2 {
+        margin-bottom: 10px;
+    }
+
+    .popup-content p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+</style>
+
+<body>
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Learn About the Different Breeds of Dogs and Cats!</h1>
+            <p>
+                Check out our encyclopedia of dog and cat breeds to find your favorite types.
+                Discover their unique characteristics and temperaments, their history and origins, and what makes each breed special. 
+                Whether you're a dog lover, a cat enthusiast, or just curious about the wonderful world of pets, our comprehensive guide has something for everyone. 
+                Start browsing now to learn about your favorite breeds!
+            </p>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://www.shutterstock.com/image-vector/set-different-breeds-cats-dogs-260nw-2736596075.jpg">
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="top-bar">
+            <div class="left-controls">
+                <span>Select:</span>
+                <button onclick="loadData('dog')">Dogs</button>
+                <span>or</span>
+                <button onclick="loadData('cat')">Cats</button>
+            </div>
+
+            <div class="right-controls">
+                <input type="text" id="search" placeholder="🔍 Search by breed..." oninput="render()">
+            </div>
+        </div>
+
+        <div id="catFilters" style="display:none;">
+            <p>Affection Level
+                <button onclick="setCatFilter('affection', 1)">1</button>
+                <button onclick="setCatFilter('affection', 2)">2</button>
+                <button onclick="setCatFilter('affection', 3)">3</button>
+                <button onclick="setCatFilter('affection', 4)">4</button>
+                <button onclick="setCatFilter('affection', 5)">5</button></p>
+
+            <p>Energy Level
+                <button onclick="setCatFilter('energy', 1)">1</button>
+                <button onclick="setCatFilter('energy', 2)">2</button>
+                <button onclick="setCatFilter('energy', 3)">3</button>
+                <button onclick="setCatFilter('energy', 4)">4</button>
+                <button onclick="setCatFilter('energy', 5)">5</button>
+
+                <br>
+            <button class="reset-btn" onclick="clearCatFilter()">Reset All</button></p>
+        </div>
+
+        <div id="dogFilters" style="display:none;">
+            <p>Breed Group
+                <button onclick="setDogFilter('Toy')">Toy</button>
+                <button onclick="setDogFilter('Working')">Working</button>
+                <button onclick="setDogFilter('Sporting')">Sporting</button>
+                <button onclick="setDogFilter('Hound')">Hound</button>
+                <button onclick="setDogFilter('Terrier')">Terrier</button>
+                <button onclick="setDogFilter('Non-Sporting')">Non-Sporting</button>
+                <button onclick="setDogFilter('Herding')">Herding</button>
+
+            <button class="reset-btn" onclick="clearDogFilter()">Reset</button></p>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div id="gallery"></div>
+
+        <div id="favoritesSidebar" class="sidebar">
+            <h3>❤️ Favourites ❤️</h3>
+            <div id="favouritesList"></div>
+        </div>
+    </div>
+
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <h2>Login Required</h2>
+            <p>You must be logged in to save favorites.</p>
+
+            <button onclick="goToLogin()">Login</button>
+            <button class="reset-btn" onclick="closeLoginPopup()">Cancel</button>
+        </div>
+    </div>
+</body>
+
+<script type="module">
+    import { setAuthUsers } from "./auth.js";
+    let loggedIn = false;
+
+    const DOG_API = "https://api.thedogapi.com/v1/breeds";
+    const CAT_API = "https://api.thecatapi.com/v1/breeds";
+
+    const DOG_KEY = "live_qWayqKM8ttpgkuJNEPQdgR8ZsbPwJpTjuWwOqYmL8YG9QLxGGA1E9z01dQdi02Ti";
+    const CAT_KEY = "live_smefV4BFSlWDLqX3YJ6ydQgiOOLpQIg0d1ft78tiihxOlvC0474fkRbQjjGfXPxb";
+
+    let breeds = [];
+    let currentType = "dog";
+    let favorites = [];
+    let catFilter = {
+        affection: 0,
+        energy: 0
+    };
+    let dogFilter = {
+        breed_group: null
+    };
+
+    async function loadData(type) {
+        currentType = type;
+
+        let url;
+        let key;
+
+        if (type === "dog") {
+            url = DOG_API;
+            key = DOG_KEY;
+        } else {
+            url = CAT_API;
+            key = CAT_KEY;
+        }
+
+        try {
+            const res = await fetch(url, {
+            headers: { "x-api-key": key }
+            });
+
+            breeds = await res.json();
+
+            document.getElementById("catFilters").style.display =
+                type === "cat" ? "block" : "none";
+
+            document.getElementById("dogFilters").style.display =
+                type === "dog" ? "block" : "none";
+
+            render();
+
+        } catch (error) {
+            console.log("Error loading data:", error);
+        }
+        
+    }
+
+    
+    function getImage(b) {
+        if (b.image?.url) return b.image.url;
+
+        if (currentType === "dog" && b.reference_image_id) {
+            return `https://cdn2.thedogapi.com/images/${b.reference_image_id}.jpg`;
+        }
+
+        if (currentType === "cat" && b.reference_image_id) {
+            return `https://cdn2.thecatapi.com/images/${b.reference_image_id}.jpg`;
+        }
+
+        return "https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg";
+    }
+
+
+    function render() {
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = "";
+
+        let search = document.getElementById("search").value.toLowerCase();
+
+        let filtered = breeds.filter(b =>
+            b.name.toLowerCase().includes(search)
+        );
+
+        if (currentType === "cat") {
+            filtered = filtered.filter(b =>
+                (catFilter.affection === 0 || (b.affection_level || 0) === catFilter.affection) &&
+                (catFilter.energy === 0 || (b.energy_level || 0) === catFilter.energy)
+            );
+        }
+
+        if (currentType === "dog") {
+            filtered = filtered.filter(b =>
+                !dogFilter.breed_group || b.breed_group === dogFilter.breed_group
+            );
+        }
+
+        filtered.forEach(b => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            let img = getImage(b);
+
+            //cat
+            if (currentType === "cat") {
+                card.innerHTML = `
+                    <img src="${img}" onerror="this.src='https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg'">
+
+                    <div class="card-content">
+                        <h3>${b.name}</h3>
+
+                        <p><strong>Origin:</strong> ${b.origin || "Unknown"}</p>
+                        <p><strong>Life:</strong> ${b.life_span || "N/A"}</p>
+                        <p><strong>Weight:</strong> ${b.weight?.metric || "N/A"} kg</p>
+
+                        <p class="traits">
+                            ${b.temperament ? b.temperament.split(",").slice(0,3).join(" • ") : "N/A"}
+                        </p>
+                    </div>
+
+                    <div class="card-hover">
+                        <h3>${b.name}</h3>
+
+                        <p>${b.description || "No description available."}</p>
+
+                        <hr>
+
+                        <p><strong>Temperament:</strong> ${b.temperament || "N/A"}</p>
+
+                        <p><strong>Affection:</strong> ${b.affection_level || "N/A"} / 5</p>
+                        <p><strong>Energy:</strong> ${b.energy_level || "N/A"} / 5</p>
+                        <p><strong>Intelligence:</strong> ${b.intelligence || "N/A"} / 5</p>
+
+                        <hr>
+
+                        <p><strong>Child Friendly:</strong> ${b.child_friendly || "N/A"} / 5</p>
+                        <p><strong>Dog Friendly:</strong> ${b.dog_friendly || "N/A"} / 5</p>
+
+                        <p><strong>Grooming:</strong> ${b.grooming || "N/A"} / 5</p>
+                        <p><strong>Shedding:</strong> ${b.shedding_level || "N/A"} / 5</p>
+
+                        <button class="bookmark-btn">Bookmark</button>
+                    </div>
+                `;
+            } 
+            //dog
+            else {
+                card.innerHTML = `
+                <img src="${img}" onerror="this.src='https://t3.ftcdn.net/jpg/03/45/05/92/360_F_345059232_CPieT8RIWOUk4JqBkkWkIETYAkmz2b75.jpg'">
+
+                <div class="card-content">
+                    <h3>${b.name}</h3>
+
+                    <p><strong>Origin:</strong> ${b.origin || "Unknown"}</p>
+                    <p><strong>Breed Group:</strong> ${b.breed_group || "N/A"}</p>
+                    <p><strong>Life Span:</strong> ${b.life_span || "N/A"}</p>
+
+                    <p><strong>Weight:</strong> ${b.weight?.metric || "N/A"} kg</p>
+                    <p><strong>Height:</strong> ${b.height?.metric || "N/A"} cm</p>
+
+                    <p class="traits">
+                    ${b.temperament ? b.temperament.split(",").slice(0, 3).join(" • ") : "N/A"}
+                    </p>
+                </div>
+
+                <div class="card-hover">
+                    <h3>${b.name}</h3>
+
+                    <p>${b.description || "No description available."}</p>
+
+                    <hr>
+
+                    <p><strong>Origin:</strong> ${b.origin || "Unknown"}</p>
+
+                    <p><strong>Weight:</strong> ${b.weight?.metric || "N/A"} kg</p>
+                    <p><strong>Height:</strong> ${b.height?.metric || "N/A"} cm</p>
+
+                    <p><strong>Life Span:</strong> ${b.life_span || "N/A"}</p>
+
+                    <p><strong>Temperament:</strong> ${b.temperament || "N/A"}</p>
+
+                    <button class="bookmark-btn">Bookmark</button>
+                </div>
+                `;
+            }
+
+            const btn = card.querySelector('.bookmark-btn');
+            if (btn) {
+                btn.addEventListener('click', () => toggleFavorite(b));
+            }
+            gallery.appendChild(card);
+        });
+    }
+
+    function setCatFilter(type, value) {
+        catFilter[type] = value;
+        render();
+    }
+    function clearCatFilter() {
+        catFilter.affection = 0;
+        catFilter.energy = 0;
+        render();
+    }
+
+    function setDogFilter(group) {
+        dogFilter.breed_group = group;
+        render();
+    }
+    function clearDogFilter() {
+        dogFilter.breed_group = null;
+        render();
+    }
+
+    setAuthUsers(
+        (user) => {
+            loggedIn = true;
+            console.log("Logged in:", user.email);
+            closeLoginPopup(); // <- auto-close popup
+            renderFavorites();
+        },
+        () => {
+            loggedIn = false;
+            favorites = [];
+            renderFavorites();
+        }
+    );
+
+    function goToLogin() {
+        window.location.href = "login.html";
+    }
+
+    function toggleFavorite(pet) {
+        if (!loggedIn) {
+        showLoginPopup();
+            return;
+        }
+
+        const index = favorites.findIndex(f => f.id === pet.id);
+        if (index === -1) {
+            favorites.push(pet);
+        } else {
+            favorites.splice(index, 1);
+        }
+        renderFavorites();
+    }
+
+    function renderFavorites() {
+        const list = document.getElementById("favouritesList");
+        list.innerHTML = "";
+
+        if (favorites.length === 0) {
+            list.innerHTML = "<p>No favorites yet.</p>";
+            return;
+        }
+
+        favorites.forEach(pet => {
+            const div = document.createElement("div");
+            div.className = "fav-item";
+
+            div.innerHTML = `
+                <img src="${getImage(pet)}" alt="${pet.name}">
+                <span>${pet.name}</span>
+                <button class="remove-btn">Remove</button>
+            `;
+
+            const removeBtn = div.querySelector(".remove-btn");
+            removeBtn.addEventListener("click", () => {
+                removeFavorite(pet.id);
+            });
+            list.appendChild(div);
+        });
+    }
+
+    function removeFavorite(id) {
+        favorites = favorites.filter(f => f.id !== id);
+        renderFavorites();
+    }
+
+    function showLoginPopup() {
+        const popup = document.getElementById("loginPopup");
+        popup.style.display = "flex";
+    }
+
+    function closeLoginPopup() {
+        document.getElementById("loginPopup").style.display = "none";
+    }
+
+    window.loadData = loadData;
+    window.render = render;
+    window.setCatFilter = setCatFilter;
+    window.setDogFilter = setDogFilter;
+    window.clearCatFilter = clearCatFilter;
+    window.clearDogFilter = clearDogFilter;
+    window.closeLoginPopup = closeLoginPopup;
+    window.goToLogin = goToLogin;
+    
+    loadData("dog");
+</script>
+</html>
