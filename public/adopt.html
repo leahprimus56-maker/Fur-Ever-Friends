@@ -29,68 +29,6 @@ html, body {
     scroll-behavior: smooth;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background-color: #F7F4EF;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-logo img {
-  height: 70px;
-  width: auto;
-}
-
-.brand-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1F3A5F; 
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 45px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #6B7280;
-}
-
-.nav-links a.active {
-  border-bottom: 2px solid #8ED1B2;
-  padding-bottom: 5px;
-}
-
-.login-btn {
-  padding: 10px 25px;
-  background-color: #b8a4d4;
-  color: black;
-  border: none;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .pagination button:disabled {
   background: #B8A7B1;
   cursor: not-allowed;
@@ -118,134 +56,10 @@ display: flex;
 flex-direction: column;
 }
 
-.login-btn:hover {
-  background-color: #6B7280;
-  transform: translateY(-1px);
-}
-
 @media (max-width: 768px) {
   .info-section {
     grid-template-columns: 1fr;
   }
-}
-
-.site-footer {
-  background-color: #F7F4EF;
-  color: #1F3A5F;
-  padding: 50px 5% 20px;
-  margin-top: 50px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  font-family: 'Open Sans', sans-serif;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-section {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footer-section h3 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #1F3A5F;
-}
-
-.footer-section p {
-  line-height: 1.6;
-  color: #4B5563;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-  text-decoration: none;
-  color: #4B5563;
-  transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-  color: #8ED1B2;
-}
-
-.footer-section img{
-    max-width: 20px;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  font-size: 0.9rem;
-  color: #6B7280;
-}
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-.modal-overlay {
-  display: none; 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(31, 58, 95, 0.7);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.modal-content {
-  background: #F7F4EF;
-  padding: 25px;
-  border-radius: 15px;
-  width: 320px;
-  text-align: center;
-  position: relative;
-  display: none; 
-  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-  animation: modalPop 0.3s ease-out;
-}
-
-.modal-content h3 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: #1F3A5F;
-}
-
-@keyframes modalPop {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  border: none;
-  background: none;
-  font-size: 22px;
-  cursor: pointer;
 }
 
 .sponsor-btn,
@@ -271,17 +85,6 @@ flex-direction: column;
 .sponsor-btn:hover,
 .adopt-btn:hover {
   transform: scale(1.05);
-}
-.animated-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.animated-icon img {
-  width: 120px;
-  height: auto;
 }
 
 #browse-pets {
@@ -473,39 +276,6 @@ flex-direction: column;
   cursor: pointer;
 }
 
-.login-btn {
-  padding: 10px 25px;
-  background-color: #b8a4d4;
-  color: black;
-  border: none;
-  border-radius: 25px;
-  font-weight: 600;
-  font-family: Open Sans;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.login-btn:hover {
-  background-color: #6B7280;
-  transform: translateY(-1px);
-}
-
-.logout-btn {
-    padding: 10px 25px;
-    background-color: #b8a4d4;
-    color: black;
-    border: none;
-    border-radius: 25px;
-    font-weight: 600;
-    font-family: Open Sans;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.logout-btn:hover {
-    background-color: #6B7280;
-    transform: translateY(-1px);
-}
   </style>
 
 <body>
@@ -580,58 +350,6 @@ flex-direction: column;
   <button onclick="prevPage()">⬅ Previous</button>
   <span id="pageInfo"></span>
   <button onclick="nextPage()">Next ➡</button>
-</div>
-
-<footer class="site-footer">
-
-  <div class="footer-content">
-
-    <div class="footer-section brand">
-      <h2 class="brand-name">Fur-Ever Friends</h2>
-      <p>Finding you your purrfect fur-ever friend!</p>
-    </div>
-
-    <div class="footer-section links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="supportus.html">Support Us</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section contact">
-      <h3>Contact</h3>
-      <p>Email: furever.friends@gmail.com</p>
-      <p>Location: Trinidad & Tobago</p>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
-  </div>
-
-</footer>
-
-<div class="modal-overlay" id="modalOverlay">
-
-  <div class="modal-content" id="loginPromptModal">
-    <button class="close-modal">&times;</button>
-
-    <div class="animated-icon">
-      <img src="https://media1.tenor.com/images/60ac021c250b833cdd9f39fede126ef3/tenor.gif">
-    </div>
-
-    <h3>Hold On, Friend!</h3>
-    <p>You need an account to continue.</p>
-
-    <div class="modal-actions">
-      <button class="modal-login-btn">Log In</button>
-      <button class="modal-signup-btn">Sign Up</button>
-    </div>
-  </div>
-
 </div>
 
 <script type="module">
