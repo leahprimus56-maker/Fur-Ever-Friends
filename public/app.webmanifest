@@ -8,13 +8,13 @@
   "description": "Discover everything there is to know about cats and dogs, from different breeds to helpful tips on how to care for them. Or if you are ready to adopt, we have a few selected pets available for you to choose from.",
   "screenshots": [
     {
-      "src": "icons/screenshot_wide.png",
+      "src": "icon/screenshot_wide.png",
       "sizes": "1840x953",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "icons/screenshot_narrow.png",
+      "src": "icon/screenshot_narrow.png",
       "sizes": "377x668",
       "type": "image/png",
       "form_factor": "narrow"
@@ -23,22 +23,22 @@
   "icons": [
         {
         "sizes": "2000x2000",
-        "src": "icons/maskable_icon.png",
+        "src": "icon/maskable_icon.png",
         "type": "image/png"
     },
     {
         "sizes": "192x192",
-        "src": "icons/maskable_icon_x192.png",
+        "src": "icon/maskable_icon_x192.png",
         "type": "image/png"
     },
     {
         "sizes": "384x384",
-        "src": "icons/maskable_icon_x384.png",
+        "src": "icon/maskable_icon_x384.png",
         "type": "image/png"
     },
     {
         "sizes": "512x512",
-        "src": "icons/maskable_icon_x512.png",
+        "src": "icon/maskable_icon_x512.png",
         "type": "image/png"
     }
   ]
