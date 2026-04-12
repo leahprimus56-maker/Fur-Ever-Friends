@@ -1,6 +1,6 @@
-🐾 Fur-Ever-Friends
+# 🐾 Fur-Ever-Friends
 
-Overview
+# Overview
 Fur-Ever Friends is a full-stack web application that allows users to explore cat and dog breeds, adopt or sponsor pets, and support animal rescue efforts.
 
 The platform combines external APIs for breed information with a local dataset for adoptable pets, while using Firebase for authentication and user-specific features like bookmarking.
@@ -9,7 +9,7 @@ Users can browse freely, but must be logged in to access interactive features.
 
 Features
 
-🏠 Home Page
+# 🏠 Home Page
 
 *  Welcome
 
@@ -23,37 +23,35 @@ Features
 
 *  Accessible to all users
 
-
-📚 Breed Browser
+# 📚 Breed Browser
 
 *  Displays detailed information on many cat and dog breeds
 
 * Uses external APIs
 
-# Users can:
+Users can:
 
 *  Bookmark favourite breeds
 
 *  Search for a certain breed
 
-# Filter:
+Filter:
 
 *  Cats → energy level, affection level
 
 *  Dogs → breed group
 
-
-🐶 Adoption Page
+# 🐶 Adoption Page
 
 *  Displays adoptable pets from a local dataset (pets.json)
 
-#  Users can:
+Users can:
 
 *  Adopt a pet
 
 *  Sponsor a pet
 
-#  Filter by:
+Filter by:
 
 *  All
 
@@ -62,23 +60,22 @@ Features
 *  Dogs
 
 
-❤️ Support Us Page
+# ❤️ Support Us Page
 
 *  Volunteer form
 
 *  Donation form
 
-
-ℹ️ About Us Page
+# ℹ️ About Us Page
 
 *  About shelter and our mission
 
 *  Our staff
 
 
-🔐 Authentication
+# 🔐 Authentication
 
-#  Signup and login required for:
+Signup and login required for:
 
 *  Bookmarking
 
@@ -99,7 +96,7 @@ Features
 
 *  Firebase
 
-*  Authentication
+*  Firebase Authentication
 
 *  Firestore Database
 
@@ -121,7 +118,7 @@ service cloud.firestore {
   }
 }
 
-#  Collections
+* Collections
 users/{userId}/favorites – stores bookmarked breeds
 
 #  API
