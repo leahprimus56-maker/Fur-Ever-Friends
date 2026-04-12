@@ -2,7 +2,7 @@
 <html>
 <head>
   <link rel="manifest" href="app.webmanifest">
-  
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fur-Ever Friends</title>
@@ -518,6 +518,8 @@
 </style>
 
 <body>
+  <button id="installBtn" style="display:none;">Install PWA</button>
+
 <nav class="navbar">
   <div class="nav-logo">
     <img src="icon/Fur-Ever Friends.png" alt="Fur-Ever Friends Logo">
@@ -816,6 +818,28 @@ function prevSlide() {
 }
 
 window.addEventListener("DOMContentLoaded", loadPets);
+
+  let deferredPrompt;
+  
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    document.getElementById('installBtn').style.display = 'block';
+  });
+
+  document.getElementById('installBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    }
+});
 </script>
 </body>
 </html>
