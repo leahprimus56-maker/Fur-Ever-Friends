@@ -499,8 +499,8 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { setAuthUsers, auth } from "./auth.js";
     import { getFirestore, doc, setDoc, deleteDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
-    const db = getFirestore(app);
-
+    const db = getFirestore();
+    
     let loggedIn = false;
 
     const DOG_API = "https://api.thedogapi.com/v1/breeds";
