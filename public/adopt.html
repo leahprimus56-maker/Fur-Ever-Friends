@@ -721,18 +721,12 @@ function initScroll() {
 }
 
 async function loadPets() {
-  const saved = localStorage.getItem("pets");
+  const res = await fetch("./pets.json");
+  const data = await res.json();
 
-  if (saved) {
-    petsData = JSON.parse(saved);
-  } else {
-    const res = await fetch("./pets.json");
-    const data = await res.json();
-    petsData = data.pets || data;
-    localStorage.setItem("pets", JSON.stringify(petsData));
-  }
-
+  petsData = data.pets || data;
   filteredPets = petsData;
+
   displayPets();
 }
 
