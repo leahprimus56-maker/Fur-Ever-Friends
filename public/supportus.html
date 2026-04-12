@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us</title>
+    <link rel="icon" type="image/x-icon" href="Fur-Ever Friends.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+
+.main-content-wrapper {
+  background-color: #F7F4EF; 
+  position: relative;
+  z-index: 2;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.support-container{
+  background-color: #ffffff; 
+  padding: 60px 5%;
+  border-radius: 30px; 
+  margin-top: -50px; 
+  margin-bottom: 50px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+}
+
+.support-hero {
+  position: relative;
+  padding: 60px 0;
+  height: 400px; 
+  text-align: center;
+  color: #1F3A5F;
+  background-image: url(https://thumbs.dreamstime.com/b/pink-paw-print-seamless-repeating-background-pattern-cat-dog-footprints-vector-illustration-editable-226293051.jpg);
+}
+
+.sticky-badge {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  
+  background-color: #b8a4d4;
+  color: #1F3A5F;
+  padding: 10px 20px;
+  border-radius: 50px;
+  width: fit-content;
+  margin: 0 auto 20px; 
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.support-hero-text{
+font-family: 'Accent-Pacifico', cursive;
+  font-size: 2.5rem;
+  color: #1F3A5F;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.support-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 80px;
+}
+
+.info-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 0px #b8a4d4; 
+}
+
+.info-text{
+    flex: 1;
+}
+
+.info-text h2 {
+  color: #1F3A5F;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.info-text p{
+    font-size: 1.3rem;
+    font-style: italic;
+}
+
+.instruction-block {
+  text-align: center;
+  max-width: 800px;
+  margin: 40px auto; 
+  padding: 30px;
+  border-top: 2px dashed #eee; 
+}
+
+.support-instruction {
+  font-size: 1.4rem;
+  color: #1F3A5F;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.forms-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.form-card {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card h3 {
+  color: #1F3A5F;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+}
+
+.form-card p {
+  color: #6B7280;
+  font-style: italic;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #1F3A5F;
+  margin-bottom: 8px;
+}
+
+.input-group input, 
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.donation-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.donation-options input[type="radio"] {
+  display: none;
+}
+
+.donation-options label {
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  cursor: pointer;
+  background: white;
+  transition: all 0.3s;
+  font-weight: 500;
+  margin: 0;
+}
+
+.donation-options input[type="radio"]:checked + label {
+  background-color: rgba(142, 209, 178, 0.2);
+  border-color: #8ED1B2;
+  color: #1F3A5F;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.payment-methods input[type="radio"] {
+  display: none;
+}
+
+.payment-icon-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  border: 2px solid #eee;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.payment-icon-label img {
+  width: 32px; 
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.payment-icon-label span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1F3A5F;
+}
+
+.payment-icon-label:hover {
+  background-color: #fcfcfc;
+  border-color: #b8a4d4;
+}
+
+.payment-methods input[type="radio"]:checked + .payment-icon-label {
+  background-color: rgba(184, 164, 212, 0.1);
+  border-color: #b8a4d4; 
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(184, 164, 212, 0.2);
+}
+.custom-amt {
+  width: 100px;
+  padding: 8px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  margin-top: auto;
+  background-color: #8ED1B2;
+  color: #1F3A5F;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); 
+  z-index: 2000; 
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 30px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  display: none; 
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+  animation: modalPop 0.3s ease-out;
+}
+
+.modal-content h3 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #1F3A5F;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #999;
+}
+
+#loginPromptModal i {
+  color: #b8a4d4;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.modal-actions button {
+  padding: 12px 30px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-login-btn {
+  background-color: #eee;
+  color: #333;
+}
+
+.modal-signup-btn {
+  background-color: #1F3A5F; 
+  color: white;
+}
+
+.animated-icon img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 25px; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#thankYouModal h3 {
+  color: #8ED1B2;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+#thankYouModal p {
+  color: #1F3A5F;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .forms-container {
+    flex-direction: column;
+    gap: 25px;
+  }
+}
+
+.wish-list {
+  background-color: #ffffff;
+  padding: 50px 5%;
+  text-align: center;
+  border-radius: 30px;
+  margin: 40px auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  max-width: 1000px;
+}
+
+.wish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.wish-item {
+  padding: 15px;
+  background: #F7F4EF;
+  border-radius: 15px;
+  color: #1F3A5F;
+  font-weight: 500;
+}
+
+.faq-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.faq-title {
+  text-align: center;
+  color: #1F3A5F;
+  font-family: 'Times New Roman', serif;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+
+.faq-container details {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.faq-container details[open] {
+  border-color: #d8a7b1;
+  box-shadow: 0 10px 20px rgba(184, 164, 212, 0.15);
+}
+
+.faq-container summary {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1F3A5F;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 30px;
+}
+
+.faq-container summary::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  color: #b8a4d4;
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.faq-container details[open] summary::after {
+  transform: rotate(45deg);
+  color: #ff6b6b;
+}
+
+.faq-container p {
+  margin-top: 15px;
+  line-height: 1.6;
+  color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+</style>
+<body>
+     <nav class="navbar">
+  <div class="nav-logo">
+    <img src="icon/Fur-Ever Friends.png" alt="Fur-Ever Friends Logo">
+    <span class="brand-name">Fur-Ever Friends</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="browser.html">Browser</a></li>
+    <li><a href="adopt.html">Adopt</a></li>
+    <li><a href="supportus.html" class="active">Support Us</a></li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="login-btn" onclick="location.href='login.html';">Login</button>
+    <button class="logout-btn" onclick="location.href='logout.html';">Logout</button>
+  </div>
+</nav>
+
+<main class="support-container">
+  <section class="support-hero">
+  <div class="sticky-badge">
+    🐾 Urgently Needed: An Extra Paw!
+  </div>
+    <h1>Support Us and Lend A Paw!</h1>
+    <p>Be the Hero They've Been Waiting For.</p>
+  </section>
+
+  <section class="info-row">
+    <div class="info-text">
+      <h2>Volunteering/Donating</h2>
+      <p>"Running a sanctuary like Fur-Ever Friends is a community effort fueled by love. Every donation—no matter the size—directly funds life-saving medical care, high-quality nutrition, and the cozy bedding that makes our shelter feel like a home. However, our residents need more than just supplies; they need the warmth of a human touch. By volunteering your time, you provide the socialization and play that helps our pets regain their confidence, making them much more likely to find their forever families. Whether you give through your wallet or your time, you are the reason we can keep our doors open and our tails wagging."</p>
+    </div>
+    <div class="info-image">
+      <img src="https://media.istockphoto.com/vectors/illustration-human-hand-holding-a-paw-heart-african-descent-vector-id501964634?k=20&m=501964634&s=612x612&w=0&h=JO8rVdZPatZeYcBMeoGgvhnfDD2x2pNWdklW5UanBAw=" alt="Lend a paw">
+    </div>
+  </section>
+  <div class="instruction-container">
+  <p class="support-instruction">
+    Ready to join the pack? To begin your journey as a volunteer/donate, please complete the relevant application forms provided below.
+  </p>
+  </div>
+  <section class="forms-container">
+  <div class="form-card volunteer-card">
+    <h3>Apply to Volunteer</h3>
+    <p>Give your time, change a life.</p>
+    <form class="support-form" id="volunteerForm">
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your Name" required>
+      </div>
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="email@address.com" required>
+      </div>
+      <div class="input-group">
+        <label>Primary Interest</label>
+        <select required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="dog-walking">Dog Walking</option>
+          <option value="cat-cuddling">Cat Cuddling</option>
+          <option value="event-help">Event Help</option>
+          <option value="grooming">Grooming</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <br>
+      <br>
+      <br>
+      <button type="submit" class="submit-btn volunteer-btn">Lend A Paw!</button>
+    </form>
+  </div>
+
+  <div class="form-card donation-card">
+    <h3>Make a Donation</h3>
+    <p>Every dollar funds a future.</p>
+    <form class="support-form" id="donationForm">
+      <div class="input-group">
+        <label>Donation Amount</label>
+        <div class="donation-options">
+          <input type="radio" name="amount" id="amt25" value="25" required>
+          <label for="amt25">$25</label>
+          
+          <input type="radio" name="amount" id="amt50" value="50">
+          <label for="amt50">$50</label>
+          
+          <input type="radio" name="amount" id="amt100" value="100">
+          <label for="amt100">$100</label>
+          
+          <input type="number" name="custom_amount" placeholder="Other $" class="custom-amt">
+        </div>
+      </div>
+  <label>Payment Method</label>
+  <div class="payment-methods">
+    <input type="radio" name="payment" id="card" value="card" required>
+    <label for="card" class="payment-icon-label">
+      <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+      <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard">
+      <span>Card</span>
+    </label>
+
+    <input type="radio" name="payment" id="paypal" value="paypal">
+    <label for="paypal" class="payment-icon-label">
+      <img src="https://img.icons8.com/color/48/paypal.png" alt="PayPal">
+      <span>PayPal</span>
+    </label>
+
+    <input type="radio" name="payment" id="digital-wallet" value="wallet">
+    <label for="digital-wallet" class="payment-icon-label">
+      <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay">
+      <span>Wallet</span>
+    </label>
+  </div>
+        <br>
+        <button type="submit" class="submit-btn donation-btn">Give Love.</button>
+
+</div>
+    </form>
+  </div>
+</section>
+
+<section class="wish-list">
+  <h3>Our Furry Friends' Wish List</h3>
+  <div class="wish-grid">
+    <div class="wish-item">🦴 Unopened Pet Food</div>
+    <div class="wish-item">🧸 Chew Toys & Scratching Posts</div>
+    <div class="wish-item">🧺 Gently Used Blankets</div>
+    <div class="wish-item">🧼 Cleaning Supplies</div>
+  </div>
+  <br>
+  <p>If you would like to grant any of our furry friends' wishes, give us a bark! @furever.friends@gmail.com</p>
+  </section>
+
+  <section class="faq-section">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  
+  <div class="faq-container">
+    <details>
+      <summary>How old do I need to be to volunteer?</summary>
+      <p>For safety reasons, volunteers must be at least 16 years old. Volunteers under 18 will need a signed parental consent form before their first shift.</p>
+    </details>
+
+    <details>
+      <summary>Is my donation tax-deductible?</summary>
+      <p>Yes! Fur-Ever Friends is a registered non-profit organization. You will receive a digital receipt via email immediately after donating for your records.</p>
+    </details>
+
+    <details>
+      <summary>Can I donate physical items instead of money?</summary>
+      <p>Absolutely! We are always in need of kitten food, gently used blankets, and cleaning supplies. Please refer to our Wish List above for current priorities.</p>
+    </details>
+
+    <details>
+      <summary>Where does my donation go?</summary>
+      <p>All funds go to providing our furry friends with nutritious meals, essential medical care such as vaccinations and surgery and to also give our new adopters a "Gotcha Day" care package.</p>
+    </details>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content" id="loginPromptModal">
+    <button class="close-modal">&times;</button>
+
+    <div class="animated-icon sad-dog-icon">
+    <img src="https://media1.tenor.com/images/60ac021c250b833cdd9f39fede126ef3/tenor.gif?itemid=15965910" alt="Sad Pug">
+  </div>
+
+    <h3><i class="fas fa-lock"></i> Hold On, Friend!</h3>
+    <p>To keep your data safe and process your application/donation, you need an account with Fur-Ever Friends.</p>
+    <div class="modal-actions">
+      <button class="modal-login-btn" onclick="location.href='login.html';">Log In</button>
+      <button class="modal-signup-btn" onclick="location.href='signUp.html';">Sign Up</button>
+    </div>
+  </div>
+
+  <div class="modal-content" id="thankYouModal">
+    <button class="close-modal">&times;</button>
+    <div class="animated-icon">
+      <img src="https://www.icegif.com/wp-content/uploads/2022/01/icegif-1573.gif" alt="Happy Pug">
+    </div>
+    <h3>Thank You!</h3>
+    <p id="thankYouMessage">Your support means the world to our shelter pets.</p>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section brand">
+      <h2 class="brand-name">Fur-Ever Friends</h2>
+      <p>Finding you your purrfect fur-ever friend!</p>
+    </div>
+    
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="supportus.html">Support Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section contact">
+      <h3>Contact</h3>
+      <p><img src="https://images.icon-icons.com/1826/PNG/512/4202011emailgmaillogomailsocialsocialmedia-115677_115624.png"><b> furever.friends@gmail.com</b></p><br>
+      <p><img src="https://images.icon-icons.com/41/PNG/128/whichapplication_conversation_email_phone_7097.png"> <b>Call or Whatsapp us at 868-125-3216</b></p><br>
+      <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
+      <p>Location: Trinidad & Tobago</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  let isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; 
+
+  const volunteerForm = document.getElementById('volunteerForm');
+  const donationForm = document.getElementById('donationForm');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const loginPromptModal = document.getElementById('loginPromptModal');
+  const thankYouModal = document.getElementById('thankYouModal');
+  const thankYouMessage = document.getElementById('thankYouMessage');
+  const closeButtons = document.querySelectorAll('.close-modal');
+
+  volunteerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleFormSubmission('volunteering');
+  });
+
+  donationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleFormSubmission('donating');
+  });
+
+  function handleFormSubmission(type) {
+    modalOverlay.style.display = 'flex';
+
+    if (!isLoggedIn) {
+      loginPromptModal.style.display = 'block';
+      thankYouModal.style.display = 'none';
+    } else {
+      loginPromptModal.style.display = 'none';
+      thankYouModal.style.display = 'block';
+
+      if (type === 'volunteering') {
+        thankYouMessage.innerText = 'Thank you for volunteering! Your big heart makes a big difference.';
+      } else {
+        thankYouMessage.innerText = 'Thank you for donating! Your gift directly helps a pet on their path home.';
+      }
+
+      setTimeout(closeModal, 4000);
+    }
+  }
+
+  function closeModal() {
+    modalOverlay.style.display = 'none';
+    loginPromptModal.style.display = 'none';
+    thankYouModal.style.display = 'none';
+  }
+
+  closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+</script>
+</body>
+</html>
