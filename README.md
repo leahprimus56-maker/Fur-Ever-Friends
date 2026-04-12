@@ -1,38 +1,153 @@
-# Fur-Ever-Friends
+🐾 Fur-Ever-Friends
 
-##  Overview
+Overview
+Fur-Ever Friends is a full-stack web application that allows users to explore cat and dog breeds, adopt or sponsor pets, and support animal rescue efforts.
 
-Fur-Ever Friends is a web application that allows users to view and adopt cats and dogs, create accounts, and donate to support animal rescue efforts. The system uses Firebase for backend services.
+The platform combines external APIs for breed information with a local dataset for adoptable pets, while using Firebase for authentication and user-specific features like bookmarking.
 
-##  Features
+Users can browse freely, but must be logged in to access interactive features.
 
-* View available cats and dogs 
-* Adopt
-* User signup and login
-* Donate page
-* About/Contact page
+Features
 
-##  Technologies
+🏠 Home Page
 
-* HTML, CSS, JavaScript
-* Firebase (Cloud Functions, Firestore, Authentication)
+*  Welcome
 
-##  Database
+*  Quick links to all sections of the app
 
-Collections used:
+*  Top residents looking for a home 
 
-* dogs
-* cats
-* users
-* donations
+*  Rescue stories
 
-##  API
+*  Links to external pet care resources
 
-* `GET /getDogs` – fetch dogs
-* `POST /addDog` – add dog
-* `GET /getCats` – fetch cats
-* `POST /addCat` – add cat
+*  Accessible to all users
 
-##  Conclusion
 
-This project demonstrates a simple full-stack application using Firebase to manage data and user authentication for a pet adoption platform.
+📚 Breed Browser
+
+*  Displays detailed information on many cat and dog breeds
+
+* Uses external APIs
+
+# Users can:
+
+*  Bookmark favourite breeds
+
+*  Search for a certain breed
+
+# Filter:
+
+*  Cats → energy level, affection level
+
+*  Dogs → breed group
+
+
+🐶 Adoption Page
+
+*  Displays adoptable pets from a local dataset (pets.json)
+
+#  Users can:
+
+*  Adopt a pet
+
+*  Sponsor a pet
+
+#  Filter by:
+
+*  All
+
+*  Cats
+
+*  Dogs
+
+
+❤️ Support Us Page
+
+*  Volunteer form
+
+*  Donation form
+
+
+ℹ️ About Us Page
+
+*  About shelter and our mission
+
+*  Our staff
+
+
+🔐 Authentication
+
+#  Signup and login required for:
+
+*  Bookmarking
+
+*  Adopting / sponsoring
+
+*  Volunteering
+
+*  Donating
+
+
+#  Technologies
+
+*  HTML
+
+*  CSS
+
+*  JavaScript
+
+*  Firebase
+
+*  Authentication
+
+*  Firestore Database
+
+*  External APIs
+
+*  Local API
+
+#  Database
+Firestore Structure
+
+The app uses Firestore mainly for storing user-specific favourites:
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/favorites/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
+
+#  Collections
+users/{userId}/favorites – stores bookmarked breeds
+
+#  API
+External APIs
+*  Dog API
+
+https://api.thedogapi.com/v1/breeds
+*  Cat API
+
+https://api.thecatapi.com/v1/breeds
+*  Note: API keys are used to authenticate requests.
+
+Local Data
+*  pets.json
+
+*  Contains both cats and dogs available for adoption
+
+*  Used for the Adoption page
+
+#  Conclusion
+This project demonstrates a modern full-stack application that integrates:
+
+*  External APIs for real-time data
+
+*  Local JSON data for adoption listings
+
+*  Firebase for authentication and user interaction
+
+It provides both an educational experience and a functional adoption platform, promoting awareness and support for animal welfare.
