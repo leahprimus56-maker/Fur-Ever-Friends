@@ -784,7 +784,6 @@ function initActions() {
         return;
       }
 
-<<<<<<< HEAD
       if (action === "adopt") {
         markPetAdopted(petId);
         alert("Adoption successful! 🎉");
@@ -794,7 +793,7 @@ function initActions() {
       if (action === "sponsor") {
         window.location.href = "donationForm.html";
       }
-=======
+
       const petCard = e.target.closest(".pet-card");
       const petName = petCard ? petCard.querySelector("h3")?.textContent : "Pet";
 
@@ -861,7 +860,6 @@ function initActions() {
         alert("Submitted successfully!");
         formBox.remove();
       });
->>>>>>> cbe6f36faf57413b3d338fa8ad0240635ef7a0e4
     }
 
     if (
