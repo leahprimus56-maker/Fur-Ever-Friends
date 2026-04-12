@@ -8,7 +8,7 @@
   <style>
 
 body {
-  font-family: 'Times New Roman', Open Sans, Accent-Pacifico;
+  font-family: 'Open Sans', 'Times New Roman', serif;
   margin: 0;
   color: #1F3A5F;
   background-color: #F7F4EF;
@@ -324,6 +324,7 @@ flex-direction: column;
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 
 .pet-card:hover {
@@ -422,8 +423,7 @@ flex-direction: column;
   to { opacity: 1; transform: translateY(0); }
 }
 
-  </style>
-</head>
+</style>
 
 <body>
 
@@ -554,59 +554,19 @@ onclick="document.getElementById('browse-pets').scrollIntoView({ behavior: 'smoo
 </div>
 
 <script type="module">
-import { setAuthUsers, logout, login } from "./auth.js";
-
-const loginForm = document.getElementById('loginForm');
-
-if (loginForm) {
-  loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email')?.value;
-    const password = document.getElementById('password')?.value;
-
-    try {
-      await login(email, password);
-      alert("Login successful!");
-      window.location.href = "index.html";
-    } catch (error) {
-      alert("Login failed: " + error.message);
-    }
-  });
-}
-
-const loginBtn = document.querySelector(".login-btn");
-const logoutBtn = document.querySelector(".logout-btn");
-
-if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
-    window.location.href = "login.html";
-  });
-}
-
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async () => {
-    await logout();
-    window.location.href = "index.html";
-  });
-}
+import { setAuthUsers } from "./auth.js";
 
 let petsData = [];
 let filteredPets = [];
 let currentPage = 1;
 const petsPerPage = 2;
-
 let loggedIn = false;
 
+const modalOverlay = document.getElementById("modalOverlay");
+
 setAuthUsers(
-  (user) => {
-    loggedIn = true;
-    console.log("Logged in:", user.email);
-  },
-  () => {
-    loggedIn = false;
-    console.log("Not logged in");
-  }
+  () => { loggedIn = true; },
+  () => { loggedIn = false; }
 );
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -617,67 +577,48 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initFilters() {
-  const filterBtns = document.querySelectorAll(".filter-btn");
+  const buttons = document.querySelectorAll(".filter-btn");
 
-  filterBtns.forEach(btn => {
+  buttons.forEach(btn => {
     btn.addEventListener("click", () => {
-      filterBtns.forEach(b => b.classList.remove("active"));
+      buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-
-      const type = btn.getAttribute("data-filter");
-      filterPets(type);
+      filterPets(btn.dataset.filter);
     });
   });
 }
 
 function initScroll() {
-  const ctaBtn = document.querySelector(".cta-button");
+  const btn = document.querySelector(".cta-button");
 
-  if (ctaBtn) {
-    ctaBtn.addEventListener("click", () => {
-      const petSection = document.getElementById("browse-pets");
-
-      if (petSection) {
-        petSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
+  if (btn) {
+    btn.addEventListener("click", () => {
+      document.getElementById("browse-pets")?.scrollIntoView({ behavior: "smooth" });
     });
   }
 }
 
 async function loadPets() {
-  try {
-    const savedPets = localStorage.getItem("pets");
+  const saved = localStorage.getItem("pets");
 
-    if (savedPets) {
-      petsData = JSON.parse(savedPets);
-    } else {
-      const res = await fetch("./pets.json");
-      const data = await res.json();
-      petsData = data.pets || data;
-
-      localStorage.setItem("pets", JSON.stringify(petsData));
-    }
-
-    filteredPets = petsData;
-    displayPets();
-  } catch (error) {
-    console.error(error);
+  if (saved) {
+    petsData = JSON.parse(saved);
+  } else {
+    const res = await fetch("./pets.json");
+    const data = await res.json();
+    petsData = data.pets || data;
+    localStorage.setItem("pets", JSON.stringify(petsData));
   }
+
+  filteredPets = petsData;
+  displayPets();
 }
 
 function filterPets(type) {
   currentPage = 1;
-
-  if (type === "all") {
-    filteredPets = petsData;
-  } else {
-    filteredPets = petsData.filter(p =>
-      p.type.toLowerCase() === type.toLowerCase()
-    );
-  }
+  filteredPets = type === "all"
+    ? petsData
+    : petsData.filter(p => p.type.toLowerCase() === type);
 
   displayPets();
 }
@@ -703,26 +644,21 @@ function displayPets() {
     const statusClass = isAvailable ? "available" : "adopted";
     const statusText = isAvailable ? "Available" : "Unavailable";
 
-    const sterilizedText = pet.sterilized ? "Yes" : "No";
+    const ageText =
+      pet.age < 1
+        ? `${Math.round(pet.age * 12)} months`
+        : `${pet.age} years`;
 
-    const ageText = pet.age < 1
-      ? `${Math.round(pet.age * 12)} months`
-      : `${pet.age} years`;
-
-    const warningText =
+    const warning =
       pet.healthIssues && pet.healthIssues !== "None"
-        ? `<p class="warning">⚠️ Warning: Extra care needed!</p>`
+        ? `<p class="warning">⚠️ Extra care needed</p>`
         : "";
 
     container.innerHTML += `
       <div class="pet-card" data-id="${pet.id}">
-        
         <img src="${pet.image}" alt="${pet.name}">
-
         <div class="pet-info">
-
-          <h3>${pet.name} <small>(ID: ${pet.id})</small></h3>
-
+          <h3>${pet.name}</h3>
           <span class="status ${statusClass}">${statusText}</span>
 
           <div class="pet-details">
@@ -730,27 +666,23 @@ function displayPets() {
             <p><b>Breed:</b> ${pet.breed}</p>
             <p><b>Age:</b> ${ageText}</p>
             <p><b>Gender:</b> ${pet.gender}</p>
-            <p><b>Sterilized:</b> ${sterilizedText}</p>
-            <p><b>Health Issues:</b> ${pet.healthIssues}</p>
+            <p><b>Sterilized:</b> ${pet.sterilized ? "Yes" : "No"}</p>
+            <p><b>Health:</b> ${pet.healthIssues}</p>
           </div>
 
           <p class="description">${pet.description}</p>
-
-          ${warningText}
+          ${warning}
 
           <div class="actions">
-            ${isAvailable ? `
-                  <button class="adopt-btn" data-id="${pet.id}" data-action="adopt">Adopt</button>
-                  <button class="sponsor-btn" data-id="${pet.id}" data-action="sponsor">Sponsor</button>
+            ${
+              isAvailable
+                ? `
+                  <button class="adopt-btn" data-id="${pet.id}">Adopt</button>
+                  <button class="sponsor-btn" data-id="${pet.id}">Sponsor</button>
                 `
-                : `
-                  <button class="adopt-btn" disabled style="background:#ccc;cursor:not-allowed;">
-                    Unavailable
-                  </button>
-                `
+                : `<button disabled>Unavailable</button>`
             }
           </div>
-
         </div>
       </div>
     `;
@@ -760,113 +692,71 @@ function displayPets() {
 }
 
 function initActions() {
-  const modalOverlay = document.getElementById("modalOverlay");
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".adopt-btn, .sponsor-btn");
 
-  function openModal() {
-    if (modalOverlay) modalOverlay.style.display = "flex";
-  }
-
-  function closeModal() {
-    if (modalOverlay) modalOverlay.style.display = "none";
-  }
-
-  document.addEventListener("click", function (e) {
-
-    if (
-      e.target.classList.contains("adopt-btn") ||
-      e.target.classList.contains("sponsor-btn")
-    ) {
-      const petId = e.target.getAttribute("data-id");
-      const action = e.target.getAttribute("data-action");
-
+    if (btn) {
       if (!loggedIn) {
-        openModal();
+        modalOverlay.style.display = "flex";
         return;
       }
 
+      const action = btn.classList.contains("adopt-btn") ? "adopt" : "sponsor";
+      const name = btn.closest(".pet-card").querySelector("h3").innerText;
+
+      const box = document.createElement("div");
+      box.className = "popup";
+      box.style.display = "flex";
+
       if (action === "adopt") {
-        markPetAdopted(petId);
-        alert("Adoption successful! 🎉");
-        loadPets();
-      }
-
-      if (action === "sponsor") {
-        window.location.href = "donationForm.html";
-      }
-
-      const petCard = e.target.closest(".pet-card");
-      const petName = petCard ? petCard.querySelector("h3")?.textContent : "Pet";
-
-      const formBox = document.createElement("div");
-      formBox.className = "popup-form";
-
-      if (adopt) {
-        formBox.innerHTML = `
+        box.innerHTML = `
           <div class="popup-content">
             <button class="close-form">&times;</button>
-            <h2>Adopt ${petName}</h2>
+            <h2>Adopt ${name}</h2>
             <form>
               <input type="text" placeholder="Full Name" required>
               <input type="email" placeholder="Email" required>
-              <input type="tel" placeholder="Phone" required>
-              <button type="submit">Submit Adoption</button>
+              <button type="submit">Submit</button>
             </form>
           </div>
         `;
       } else {
-        formBox.innerHTML = `
-          <div class="popup-content sponsor-popup">
+        box.innerHTML = `
+          <div class="popup-content">
             <button class="close-form">&times;</button>
+            <h2>Sponsor ${name}</h2>
+            <form>
+              <input type="number" placeholder="Amount" required>
 
-            <h2>Sponsor ${petName}</h2>
-            <p>Support ${petName} with a monthly contribution.</p>
-
-            <form id="sponsorForm">
-              <div class="input-group">
-                <label>Monthly Contribution</label>
-
-                <div class="donation-options">
-                  <label><input type="radio" name="amount" value="25" required> $25</label>
-                  <label><input type="radio" name="amount" value="50"> $50</label>
-                  <label><input type="radio" name="amount" value="100"> $100</label>
-                </div>
-
-                <input type="number" name="custom_amount" placeholder="Other amount ($)" />
-              </div>
-
-              <div class="input-group">
-                <label>Payment Method</label>
-
+              <label>Payment Method</label>
+              <div>
                 <label><input type="radio" name="payment" value="card" required> Card</label>
                 <label><input type="radio" name="payment" value="paypal"> PayPal</label>
                 <label><input type="radio" name="payment" value="wallet"> Wallet</label>
               </div>
 
-              <button type="submit">Sponsor ${petName}</button>
+              <button type="submit">Submit</button>
             </form>
           </div>
         `;
       }
 
-      document.body.appendChild(formBox);
+      document.body.appendChild(box);
 
-      formBox.querySelector(".close-form").addEventListener("click", () => {
-        formBox.remove();
-      });
+      box.querySelector(".close-form").onclick = () => box.remove();
 
-      const form = formBox.querySelector("form");
-      form.addEventListener("submit", (ev) => {
+      box.querySelector("form").onsubmit = ev => {
         ev.preventDefault();
-        alert("Submitted successfully!");
-        formBox.remove();
-      });
+        alert("Submitted!");
+        box.remove();
+      };
     }
 
     if (
       e.target.classList.contains("close-modal") ||
       e.target.id === "modalOverlay"
     ) {
-      closeModal();
+      modalOverlay.style.display = "none";
     }
 
     if (
@@ -878,54 +768,14 @@ function initActions() {
   });
 }
 
-  function openModal() {
-    if (modalOverlay) modalOverlay.style.display = "flex";
-  }
-
-  function closeModal() {
-    if (modalOverlay) modalOverlay.style.display = "none";
-  }
-
-  document.addEventListener("click", function (e) {
-    if (
-      e.target.classList.contains("adopt-btn") ||
-      e.target.classList.contains("sponsor-btn")
-    ) {
-      if (!loggedIn) {
-        openModal();
-      } else {
-        const action = e.target.getAttribute("data-action");
-
-        window.location.href =
-          action === "adopt"
-            ? "adoptionForm.html"
-            : "donationForm.html";
-      }
-    }
-
-    if (
-      e.target.classList.contains("close-modal") ||
-      e.target.id === "modalOverlay"
-    ) {
-      closeModal();
-    }
-
-    if (
-      e.target.classList.contains("modal-login-btn") ||
-      e.target.classList.contains("modal-signup-btn")
-    ) {
-      window.location.href = "login.html";
-    }
-  });
-
-window.nextPage = function () {
+window.nextPage = () => {
   if (currentPage * petsPerPage < filteredPets.length) {
     currentPage++;
     displayPets();
   }
 };
 
-window.prevPage = function () {
+window.prevPage = () => {
   if (currentPage > 1) {
     currentPage--;
     displayPets();
@@ -933,14 +783,8 @@ window.prevPage = function () {
 };
 
 function updatePagination() {
-  const totalPages =
-    Math.ceil(filteredPets.length / petsPerPage) || 1;
-
-  const pageInfo = document.getElementById("pageInfo");
-
-  if (pageInfo) {
-    pageInfo.innerText = `Page ${currentPage} of ${totalPages}`;
-  }
+  const total = Math.ceil(filteredPets.length / petsPerPage) || 1;
+  document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${total}`;
 }
 </script>
 </body>
