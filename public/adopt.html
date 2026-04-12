@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Adopt - Fur-Ever Friends</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
   <style>
@@ -392,11 +393,16 @@ flex-direction: column;
 }
 
 .popup {
-  display: none;
   position: fixed;
-  background: rgba(31, 58, 95, 0.7);
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(31, 58, 95, 0.7);
+  z-index: 9999;
 }
 
 .popup-content {
@@ -534,24 +540,23 @@ onclick="document.getElementById('browse-pets').scrollIntoView({ behavior: 'smoo
 </footer>
 
 <div class="modal-overlay" id="modalOverlay">
-
   <div class="modal-content" id="loginPromptModal">
-    <button class="close-modal">&times;</button>
+  <button class="close-modal" onclick="closeLoginPopup()">&times;</button>
 
-    <div class="animated-icon">
-      <img src="https://media1.tenor.com/images/60ac021c250b833cdd9f39fede126ef3/tenor.gif">
-    </div>
+  <div class="animated-icon">
+    <img src="https://media1.tenor.com/images/60ac021c250b833cdd9f39fede126ef3/tenor.gif" alt="Sad Pug">
+  </div>
 
-    <h3>Hold On, Friend!</h3>
-    <p>You need an account to continue.</p>
+  <h3>Login Required</h3>
+  <p>You must be logged in to continue.</p>
 
-    <div class="modal-actions">
-      <button class="modal-login-btn">Log In</button>
-      <button class="modal-signup-btn">Sign Up</button>
-    </div>
-
+  <div class="modal-actions">
+    <button class="modal-login-btn" onclick="window.location.href='login.html'">Log In</button>
+    <button class="modal-signup-btn" onclick="window.location.href='signup.html'">Sign Up</button>
+  </div>
   </div>
 </div>
+
 
 <script type="module">
 import { setAuthUsers } from "./auth.js";
@@ -572,7 +577,6 @@ setAuthUsers(
 document.addEventListener("DOMContentLoaded", () => {
   initFilters();
   initScroll();
-  initActions();
   loadPets();
 });
 
@@ -691,82 +695,67 @@ function displayPets() {
   updatePagination();
 }
 
-function initActions() {
-  document.addEventListener("click", e => {
-    const btn = e.target.closest(".adopt-btn, .sponsor-btn");
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".adopt-btn, .sponsor-btn");
+  if (!btn) return;
 
-    if (btn) {
-      if (!loggedIn) {
-        modalOverlay.style.display = "flex";
-        return;
-      }
+  if (!loggedIn) {
+    modalOverlay.style.display = "flex";
+    return;
+  }
 
-      const action = btn.classList.contains("adopt-btn") ? "adopt" : "sponsor";
-      const name = btn.closest(".pet-card").querySelector("h3").innerText;
+  const action = btn.classList.contains("adopt-btn") ? "adopt" : "sponsor";
+  const name = btn.closest(".pet-card").querySelector("h3").innerText;
 
-      const box = document.createElement("div");
-      box.className = "popup";
-      box.style.display = "flex";
+  console.log("Action:", action, "Pet:", name);
 
-      if (action === "adopt") {
-        box.innerHTML = `
-          <div class="popup-content">
-            <button class="close-form">&times;</button>
-            <h2>Adopt ${name}</h2>
-            <form>
-              <input type="text" placeholder="Full Name" required>
-              <input type="email" placeholder="Email" required>
-              <button type="submit">Submit</button>
-            </form>
+  const box = document.createElement("div");
+  box.className = "popup";
+  box.style.display = "flex";
+
+  if (action === "adopt") {
+    box.innerHTML = `
+      <div class="popup-content">
+        <button class="close-form">&times;</button>
+        <h2>Adopt ${name}</h2>
+        <form>
+          <input type="text" placeholder="Full Name" required>
+          <input type="email" placeholder="Email" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    `;
+  } else {
+    box.innerHTML = `
+      <div class="popup-content">
+        <button class="close-form">&times;</button>
+        <h2>Sponsor ${name}</h2>
+        <form>
+          <input type="number" placeholder="Amount" required>
+
+          <label>Payment Method</label>
+          <div>
+            <label><input type="radio" name="payment" value="card" required> Card</label>
+            <label><input type="radio" name="payment" value="paypal"> PayPal</label>
+            <label><input type="radio" name="payment" value="wallet"> Wallet</label>
           </div>
-        `;
-      } else {
-        box.innerHTML = `
-          <div class="popup-content">
-            <button class="close-form">&times;</button>
-            <h2>Sponsor ${name}</h2>
-            <form>
-              <input type="number" placeholder="Amount" required>
 
-              <label>Payment Method</label>
-              <div>
-                <label><input type="radio" name="payment" value="card" required> Card</label>
-                <label><input type="radio" name="payment" value="paypal"> PayPal</label>
-                <label><input type="radio" name="payment" value="wallet"> Wallet</label>
-              </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    `;
+  }
 
-              <button type="submit">Submit</button>
-            </form>
-          </div>
-        `;
-      }
+  document.body.appendChild(box);
 
-      document.body.appendChild(box);
+  box.querySelector(".close-form").onclick = () => box.remove();
 
-      box.querySelector(".close-form").onclick = () => box.remove();
-
-      box.querySelector("form").onsubmit = ev => {
-        ev.preventDefault();
-        alert("Submitted!");
-        box.remove();
-      };
-    }
-
-    if (
-      e.target.classList.contains("close-modal") ||
-      e.target.id === "modalOverlay"
-    ) {
-      modalOverlay.style.display = "none";
-    }
-
-    if (
-      e.target.classList.contains("modal-login-btn") ||
-      e.target.classList.contains("modal-signup-btn")
-    ) {
-      window.location.href = "login.html";
-    }
-  });
-}
+  box.querySelector("form").onsubmit = (ev) => {
+    ev.preventDefault();
+    alert("Submitted!");
+    box.remove();
+  };
+});
 
 window.nextPage = () => {
   if (currentPage * petsPerPage < filteredPets.length) {
@@ -786,6 +775,7 @@ function updatePagination() {
   const total = Math.ceil(filteredPets.length / petsPerPage) || 1;
   document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${total}`;
 }
+
 </script>
 </body>
 </html>
