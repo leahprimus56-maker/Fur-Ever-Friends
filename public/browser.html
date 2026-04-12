@@ -496,9 +496,10 @@
 </body>
 
 <script type="module">
-    import { setAuthUsers } from "./auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { setAuthUsers, auth } from "./auth.js";
     import { getFirestore, doc, setDoc, deleteDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
-    const db = getFirestore();
+    const db = getFirestore(app);
 
     let loggedIn = false;
 
@@ -730,7 +731,10 @@
 
             try {
                 const snapshot = await getDocs(collection(db, "users", user.uid, "favorites"));
-                favorites = snapshot.docs.map(doc => doc.data());
+                favorites = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    id: doc.id
+                }));
                 renderFavorites();
             } catch (error) {
                 console.error("Error loading favorites:", error);
@@ -753,10 +757,17 @@
             return;
         }
 
-        const exists = favorites.some(f => f.id === pet.id);
-        if (exists) return;
+        const user = auth.currentUser;
+        if (!user) return;
 
-        const userId = auth.currentUser.uid;
+        const exists = favorites.some(f => f.id === pet.id);
+        if (exists) {
+            alert("Already in favorites");
+            return;
+        }
+
+        const userId = user.uid;
+
         try {
             await setDoc(doc(db, "users", userId, "favorites", pet.id.toString()), pet);
             favorites.push(pet);
@@ -794,7 +805,11 @@
     }
 
     async function removeFavorite(id) {
-        const userId = auth.currentUser.uid;
+        const user = auth.currentUser;
+        if (!user) return;
+
+        const userId = user.uid;
+
         try {
             await deleteDoc(doc(db, "users", userId, "favorites", id.toString()));
             favorites = favorites.filter(f => f.id !== id);
