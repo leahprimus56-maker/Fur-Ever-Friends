@@ -325,6 +325,19 @@
     "sterilized": false,
     "healthIssues": "Deworming in progress",
     "description": "Sweet and playful puppy with a great sense of smell."
-    }
+    },
+    {
+    "id": "0026",
+    "name": "Mittens",
+    "type": "cat",
+    "breed": "Domestic Shorthair",
+    "age": 0.8,
+    "status": "Available",
+    "image": "https://www.catster.com/wp-content/uploads/2023/11/American-shorthair-cat-kitten-sitting_Top-Photo-Engineer_Shutterstock.jpg",
+    "gender": "female",
+    "sterilized": false,
+    "healthIssues": "None",
+    "description": "Curious and affectionate kitten who loves to play and cuddle."
+  }
   ]
 }
