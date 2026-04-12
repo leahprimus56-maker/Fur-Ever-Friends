@@ -906,12 +906,12 @@ function updatePagination() {
   document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${total}`;
 }
 
-function closeLoginPopup() {
+window.closeLoginPopup = function () {
   const modal = document.getElementById("modalOverlay");
   if (modal) {
     modal.style.display = "none";
   }
-}
+};
 
 </script>
 </body>
