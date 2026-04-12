@@ -497,6 +497,9 @@
 
 <script type="module">
     import { setAuthUsers } from "./auth.js";
+    import { getFirestore, doc, setDoc, deleteDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+    const db = getFirestore();
+
     let loggedIn = false;
 
     const DOG_API = "https://api.thedogapi.com/v1/breeds";
@@ -720,11 +723,18 @@
     }
 
     setAuthUsers(
-        (user) => {
+        async (user) => {
             loggedIn = true;
             console.log("Logged in:", user.email);
-            closeLoginPopup(); // <- auto-close popup
-            renderFavorites();
+            closeLoginPopup();
+
+            try {
+                const snapshot = await getDocs(collection(db, "users", user.uid, "favorites"));
+                favorites = snapshot.docs.map(doc => doc.data());
+                renderFavorites();
+            } catch (error) {
+                console.error("Error loading favorites:", error);
+            }
         },
         () => {
             loggedIn = false;
@@ -737,19 +747,23 @@
         window.location.href = "login.html";
     }
 
-    function toggleFavorite(pet) {
+    async function toggleFavorite(pet) {
         if (!loggedIn) {
             openLoginPopup();
             return;
         }
 
         const exists = favorites.some(f => f.id === pet.id);
-        if (exists) {
-            return;
-        }
+        if (exists) return;
 
-        favorites.push(pet);
-        renderFavorites();
+        const userId = auth.currentUser.uid;
+        try {
+            await setDoc(doc(db, "users", userId, "favorites", pet.id.toString()), pet);
+            favorites.push(pet);
+            renderFavorites();
+        } catch (error) {
+            console.error("Error saving favorite:", error);
+        }
     }
 
     function renderFavorites() {
@@ -779,9 +793,15 @@
         });
     }
 
-    function removeFavorite(id) {
-        favorites = favorites.filter(f => f.id !== id);
-        renderFavorites();
+    async function removeFavorite(id) {
+        const userId = auth.currentUser.uid;
+        try {
+            await deleteDoc(doc(db, "users", userId, "favorites", id.toString()));
+            favorites = favorites.filter(f => f.id !== id);
+            renderFavorites();
+        } catch (error) {
+            console.error("Error removing favorite:", error);
+        }
     }
 
     function openLoginPopup() {
