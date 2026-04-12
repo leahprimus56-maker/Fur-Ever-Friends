@@ -345,12 +345,16 @@ html, body {
 }
 
 .status {
-  display: inline-block;
-  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: white;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .status.available {
@@ -782,20 +786,59 @@ function initActions() {
         return;
       }
 
+      const petCard = e.target.closest(".pet-card");
+      const petName = petCard ? petCard.querySelector("h3")?.textContent : "Pet";
+
       const formBox = document.createElement("div");
       formBox.className = "popup-form";
-      formBox.innerHTML = `
-        <div class="popup-content">
-          <button class="close-form">&times;</button>
-          <h2>${adopt ? "Adoption Form" : "Sponsor Form"}</h2>
-          <form>
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="tel" placeholder="Phone" required>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      `;
+
+      if (adopt) {
+        formBox.innerHTML = `
+          <div class="popup-content">
+            <button class="close-form">&times;</button>
+            <h2>Adopt ${petName}</h2>
+            <form>
+              <input type="text" placeholder="Full Name" required>
+              <input type="email" placeholder="Email" required>
+              <input type="tel" placeholder="Phone" required>
+              <button type="submit">Submit Adoption</button>
+            </form>
+          </div>
+        `;
+      } else {
+        formBox.innerHTML = `
+          <div class="popup-content sponsor-popup">
+            <button class="close-form">&times;</button>
+
+            <h2>Sponsor ${petName}</h2>
+            <p>Support ${petName} with a monthly contribution.</p>
+
+            <form id="sponsorForm">
+              <div class="input-group">
+                <label>Monthly Contribution</label>
+
+                <div class="donation-options">
+                  <label><input type="radio" name="amount" value="25" required> $25</label>
+                  <label><input type="radio" name="amount" value="50"> $50</label>
+                  <label><input type="radio" name="amount" value="100"> $100</label>
+                </div>
+
+                <input type="number" name="custom_amount" placeholder="Other amount ($)" />
+              </div>
+
+              <div class="input-group">
+                <label>Payment Method</label>
+
+                <label><input type="radio" name="payment" value="card" required> Card</label>
+                <label><input type="radio" name="payment" value="paypal"> PayPal</label>
+                <label><input type="radio" name="payment" value="wallet"> Wallet</label>
+              </div>
+
+              <button type="submit">Sponsor ${petName}</button>
+            </form>
+          </div>
+        `;
+      }
 
       document.body.appendChild(formBox);
 
@@ -803,7 +846,8 @@ function initActions() {
         formBox.remove();
       });
 
-      formBox.addEventListener("submit", (ev) => {
+      const form = formBox.querySelector("form");
+      form.addEventListener("submit", (ev) => {
         ev.preventDefault();
         alert("Submitted successfully!");
         formBox.remove();
