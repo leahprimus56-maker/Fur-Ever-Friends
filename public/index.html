@@ -8,20 +8,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <style>
-    body, html {
+    body {
       margin: 0;
       font-family: 'Open Sans', 'Times New Roman', serif;
       background-color: #F7F4EF;
-    }
-
-    .footer-section ul li b {
-      text-decoration: none;
-      color: #4B5563;
-      transition: color 0.3s ease;
-    }
-
-    .footer-section ul li b:hover {
-      color: #8ED1B2;
     }
 
     .welcome-container {
@@ -482,19 +472,6 @@
       transform: translateY(-3px);
     }
 
-    .links {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 20px;
-    }
-
-    .links a {
-      background: #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-
     @media (max-width: 768px) {
       .welcome-container {
         flex-direction: column;
@@ -531,6 +508,11 @@
         font-size: 1.2rem;
       }
     }
+
+    .page-content {
+      display: flex;
+      flex-direction: column;
+    }
 </style>
 
 <body>
@@ -553,6 +535,8 @@
     <button class="logout-btn" onclick="location.href='logout.html';">Logout</button>
   </div>
 </nav>
+
+<main class="page-content">
 
 <section class="hero-section">
   <div class="welcome-container">
@@ -690,7 +674,7 @@
 <section class="support-us">
   <div class="support-header">
     <h2>How You Can Help</h2>
-    <p>Every action makes a difference in a pet’s life.</p>
+    <p>Every action makes a difference in a pet's life.</p>
   </div>
 
   <div class="support-cards">
@@ -746,21 +730,23 @@
   </div>
 </section>
 
+</main>
+
 <footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-section brand">
-      <h2 class="brand-name">Fur-Ever Friends</h2>
-      <p>Finding you your purrfect fur-ever friend!</p>
+    <div class="footer-content">
+      <div class="footer-section brand">
+        <h2 class="brand-name">Fur-Ever Friends</h2>
+        <p>Finding you your purrfect fur-ever friend!</p>
     </div>
-    
+                
     <div class="footer-section links">
       <h3>Quick Links</h3>
       <ul>
-        <li><b href="index.html">Home</b></li>
-        <li><b href="aboutus.html">About Us</b></li>
-        <li><b href="supportus.html">Support Us</b></li>
-      </ul>
-    </div>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="supportus.html">Support Us</a></li>
+    </ul>
+  </div>
 
     <div class="footer-section contact">
       <h3>Contact</h3>
@@ -769,9 +755,12 @@
       <p><img src="https://images.icon-icons.com/1753/PNG/512/iconfinder-social-media-applications-3instagram-4102579_113804.png"><b> @furever_friends</b></p>
       <p>Location: Trinidad & Tobago</p>
     </div>
-</div>
-</footer>
+    </div>
 
+    <div class="footer-bottom">
+      <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+    </div>
+</footer>
 <script>
 let pets = [];
 
