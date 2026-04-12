@@ -515,10 +515,19 @@
       display: flex;
       flex-direction: column;
     }
+
+    #installInstructions {
+      display: none
+    }
+    @media (display-mode: browser) {
+      #installInstructions {
+        display: block
+      }
+    }
 </style>
 
 <body>
-  <button id="installBtn" style="display:none;">Install PWA</button>
+<button id="installBtn" style="display:none;">Install App</button>
 
 <nav class="navbar">
   <div class="nav-logo">
@@ -817,29 +826,35 @@ function prevSlide() {
   updateCarousel();
 }
 
-window.addEventListener("DOMContentLoaded", loadPets);
+let deferredPrompt;
 
-  let deferredPrompt;
-  
-  window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-    document.getElementById('installBtn').style.display = 'block';
-  });
-
-  document.getElementById('installBtn').addEventListener('click', () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        } else {
-          console.log('User dismissed the install prompt');
-        }
-        deferredPrompt = null;
-      });
-    }
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  showInAppInstallPromotion();
 });
+
+function showInAppInstallPromotion() {
+  const installButton = document.getElementById('installBtn');
+  installButton.style.display = 'block';
+}
+
+const installButton = document.getElementById('installBtn');
+installButton.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt.');
+    } else if (outcome === 'dismissed') {
+      console.log('User dismissed the install prompt');
+    }
+  }
+});
+
+window.addEventListener("DOMContentLoaded", loadPets);
 </script>
 </body>
 </html>
