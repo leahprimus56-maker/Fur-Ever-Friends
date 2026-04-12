@@ -13,7 +13,7 @@
 
 body, html {
     margin: 0;
-    font-family: 'Times New Roman', serif;
+    font-family: 'Open Sans', 'Times New Roman', serif;
     background-color: #F7F4EF;
   }
 
@@ -234,6 +234,49 @@ summary { font-weight: bold; font-size: 1.1rem; color: #1f3a5f; }
   padding: 10px;
   text-align: center;
 }
+
+.carousel {
+  position: relative;
+  width: 300px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+}
+
+.slide {
+  min-width: 100%;
+  display: none;
+  text-align: center;
+}
+
+.slide.active {
+  display: block;
+}
+
+.pet-img-placeholder {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+button.prev, button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
 </style>
 
 <body>
@@ -277,29 +320,41 @@ summary { font-weight: bold; font-size: 1.1rem; color: #1f3a5f; }
       <a href="signUp.html" class="animated-signup-link">Sign up</a>
     </div>
   </section>
-<!-- 3. Featured Pets -->
+<!-- 3. Featured Pets Carousel -->
 <section class="featured-pets">
-<div class="section-header">
- <h2>Meet Our Featured Friends</h2>
-<p>Our top residents looking for a home this week.</p>
-</div>
-<div class="pet-grid">
-<div class="pet-card">
-<div class="pet-img-placeholder" style="background-image: url('https://yumove.co.uk/cdn/shop/files/Labrador-Retriever.jpg?v=1749566503&width=550');"></div>
-<h3>Max</h3>
-<p>Labrador • 2 Years</p>
-</div>
-<div class="pet-card highlight">
- <div class="pet-img-placeholder" style="background-image: url('https://media.istockphoto.com/id/1409515292/photo/white-persian-cat.jpg?s=612x612&w=0&k=20&c=1JvGqAS88IakPZhvfjdeWmMReK0lNyUohvA2cK6qyvM=');"></div>
-<h3>Oliver</h3>
-<p>Tabby Cat • 2 Years</p>
+  <div class="section-header">
+    <h2>Meet Our Featured Friends</h2>
+    <p>Our top residents looking for a home this week.</p>
+  </div>
 
-</div>
-<div class="pet-card">
-<div class="pet-img-placeholder" style="background-image: url('https://drloudon.com/wp-content/uploads/2022/05/skin-allergies.jpg');"></div>
-<h3>Bella</h3>
-<p>Beagle • 3 Years</p>
-</div>
+  <div class="carousel">
+    <button class="prev" onclick="prevSlide()">❮</button>
+
+    <div class="carousel-track">
+
+      <div class="pet-card slide active">
+        <div class="pet-img-placeholder" style="background-image: url('https://yumove.co.uk/cdn/shop/files/Labrador-Retriever.jpg?v=1749566503&width=550');"></div>
+        <h3>Max</h3>
+        <p>Labrador • 2 Years</p>
+      </div>
+
+      <div class="pet-card slide">
+        <div class="pet-img-placeholder" style="background-image: url('https://media.istockphoto.com/id/1409515292/photo/white-persian-cat.jpg?s=612x612&w=0&k=20&c=1JvGqAS88IakPZhvfjdeWmMReK0lNyUohvA2cK6qyvM=');"></div>
+        <h3>Oliver</h3>
+        <p>Tabby Cat • 2 Years</p>
+      </div>
+
+      <div class="pet-card slide">
+        <div class="pet-img-placeholder" style="background-image: url('https://drloudon.com/wp-content/uploads/2022/05/skin-allergies.jpg');"></div>
+        <h3>Bella</h3>
+        <p>Beagle • 3 Years</p>
+      </div>
+
+    </div>
+
+    <button class="next" onclick="nextSlide()">❯</button>
+  </div>
+</section>
 
 <a href="signUp.html" class="learn-button">Learn More</a> 
 
@@ -307,7 +362,7 @@ summary { font-weight: bold; font-size: 1.1rem; color: #1f3a5f; }
 </div>
 </section>
 
-ADOPTION STORIES 
+
 <section class="stories-section">
 <div class="container">
 <h2>Heartwarming Success Stories</h2>
@@ -347,12 +402,28 @@ ADOPTION STORIES
 
 <!-- CARE -->
 <section class="care">
-  <h2>How to care for a pet?</h2>
+  <h2>Learn how to care for a pet.</h2>
   <div class="links">
-    <a href="#">Feeding Guide</a>
-    <a href="#">Training</a>
-    <a href="#">Health</a>
-    <a href="#">Grooming</a> 
+    
+    <details>
+      <summary>Feeding Guide</summary>
+      <p>Learn about proper pet nutrition and feeding schedules.</p>
+    </details>
+    
+    <details>
+<summary>Training</summary>
+<p>Discover effective training techniques for dogs and cats.</p>
+</details>
+    
+    <details> 
+<summary>Health</summary>
+<p>Get tips on keeping your pet healthy and happy.</p>
+</details>
+    
+    <details> 
+<summary>Grooming</summary>
+<p>Find out how to groom your pet for a clean and comfortable life.</p>
+    </details> 
   </div>
 </section>
 
