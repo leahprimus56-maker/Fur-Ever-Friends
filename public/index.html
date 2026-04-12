@@ -1,110 +1,386 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fur-Ever Friends</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<style>
+
+
+
+
+body, html {
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    background-color: #F7F4EF;
+  }
+
+  .hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 10%;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 50px; 
+  }
+
+  .hero-text {
+    flex: 1;
+    padding-right: 40px;
+  }
+
+  .hero-text h1 {
+    font-size: 50px;
+    color: #1f3a5f;
+    margin-bottom: 10px;
+  }
+
+  .hero-text p {
+    font-size: 20px;
+    color: #4b5563;
+    margin-bottom: 30px;
+  }
+
+  .hero-text button {
+    border: none;
+    outline: 0;
+    padding: 15px 35px;
+    color: white;
+    background-color: #4A90E2; 
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: 0.3s;
+  }
+
+  .hero-text button:hover {
+    background-color: #1f3a5f;
+    transform: translateY(-3px);
+  }
+
+  .hero-image {
+    flex: 1;
+    text-align: right;
+  }
+
+  .hero-image img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 10px 10px 0px #b8a4d4; 
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 5%;
+    }
+    .hero-text {
+      padding-right: 0;
+      margin-bottom: 30px;
+    }
+    .hero-image {
+      text-align: center;
+    }
+  }
+
+  .membership-banner {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    min-height: 300px;
+    
+    background-image: url(https://media.istockphoto.com/id/1790819526/vector/african-american-woman-adopting-dog-banner-with-female-hugging-dog-flat-style-vector.jpg?s=612x612&w=0&k=20&c=N0hZdlJXI36Kj4xUikU9936VGhogEF-fjWMfJ2vQxbI=); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin: 50px 0; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .membership-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1;
+  }
+
+  .banner-content {
+    position: relative;
+    z-index: 2; 
+    text-align: center;
+    color: white; 
+    padding: 0 20px;
+  }
+
+  .banner-content h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .animated-signup-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white; 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .animated-signup-link:hover {
+    color: #8ED1B2; 
+  }
+
+  .animated-signup-link::after {
+    content: '>'; 
+    margin-left: 8px; 
+    display: inline-block;
+    animation: nudgeArrow 1.2s infinite; 
+  } @keyframes nudgeArrow {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(8px);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .banner-content h2 {
+      font-size: 2rem;
+    }
+    .animated-signup-link {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* Support Us */
+.support-us { display: flex; padding: 60px 10%; gap: 20px; }
+.action-card { flex: 1; padding: 40px; background: white; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+/* Accordion Stories */
+.stories-section { padding: 60px 10%; background: #fff; }
+details { background: #f9f9f9; padding: 15px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; }
+summary { font-weight: bold; font-size: 1.1rem; color: #1f3a5f; }
+/* Featured Pets Grid */
+.featured-pets { padding: 60px 10%; text-align: center; }
+.section-header { margin-bottom: 40px; }
+.pet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+
+.pet-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.pet-card.highlight { border: 2px solid #b8a4d4; transform: scale(1.05); }
+.pet-img-placeholder { height: 200px; background-size: cover; background-position: center; border-radius: 10px; margin-bottom: 15px; background-color: #eee; }
+.card-btn { border: 1.5px solid #4A90E2; background: none; color: #4A90E2; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
+
+
+/* Membership Banner */
+.membership-banner {
+    position: relative; height: 350px; background-image: url('https://media.istockphoto.com/id/1790819526/vector/african-american-woman-adopting-dog-banner-with-female-hugging-dog-flat-style-vector.jpg?s=612x612&w=0&k=20&c=N0hZdlJXI36Kj4xUikU9936VGhogEF-fjWMfJ2vQxbI=');
+    background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; text-align: center;
+}
+.membership-banner::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+.banner-content { position: relative; z-index: 2; color: white; }
+.banner-content h2 { font-size: 2.5rem; margin-bottom: 15px; }
+
+.animated-signup-link { font-size: 1.5rem; color: #fff; text-decoration: none; font-weight: bold; }
+.animated-signup-link::after { content: ' >'; display: inline-block; animation: nudgeArrow 1.2s infinite; }
+
+@keyframes nudgeArrow {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(8px); }
+}
+/* CARE */
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+}
+
+.links a {
+  background: #ddd;
+  padding: 10px;
+  text-align: center;
+}
+</style>
 
 <body>
 
 <!-- NAVBAR -->
-<div class="navbar">
-  <div>LOGO</div>
+<nav class="navbar">
+<div class="nav-logo">
+ <img src="icon/Fur-Ever Friends.png" alt="Fur-Ever Friends Logo">
+ <span class="brand-name">Fur-Ever Friends</span>
+</div>
+ <ul class="nav-links">
+ <li><a href="index.html">Home</a></li>
+ <li><a href="browser.html" class="active">Browser</a></li>
+ <li><a href="adopt.html">Adopt</a></li>
+ <li><a href="supportus.html">Support Us</a></li>
+ <li><a href="aboutus.html">About Us</a></li>
+ </ul>
 
-  <div class="nav-links">
-    Home | Browse | Adopt | Support Us | About Us | Login
+ <div class="nav-actions">
+  <button class="login-btn">Login</button>
+  <button class="logout-btn">Logout</button>
+  </div>
+    </nav>
+
+
+<div class="hero-section">
+  <div class="hero-text">
+    <h1>Find your favourite type now!</h1>
+    <p>See our catalog of cat & dog breeds to find your purr-fect match.</p>
+    <button onclick="location.href='browser.html'">Browse</button>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://media.istockphoto.com/id/1442046417/vector/social-media-post-design-with-pet-adoption-promotion-save-life-adopt-banner-with-cute-dogs.jpg?s=612x612&w=0&k=20&c=_SW-skunyYEao5Ru3xPEzsnIDMs0wJtJ2O8VLj9p3DE=" alt="Pet Adoption">
   </div>
 </div>
 
-<!-- HOME -->
-<div class="home">
-  <div class="home-left">
-    <h2>Find your favourite type now!</h2>
-    <p>See our catalog of cat & dog breeds</p>
-    <button onclick="scrollToPets()">Browse</button>
-  </div>
+<section class="membership-banner">
+    <div class="banner-content">
+      <h2>Become a Member Today!</h2>
+      <a href="signUp.html" class="animated-signup-link">Sign up</a>
+    </div>
+  </section>
+<!-- 3. Featured Pets -->
+<section class="featured-pets">
+<div class="section-header">
+ <h2>Meet Our Featured Friends</h2>
+<p>Our top residents looking for a home this week.</p>
+</div>
+<div class="pet-grid">
+<div class="pet-card">
+<div class="pet-img-placeholder" style="background-image: url('https://yumove.co.uk/cdn/shop/files/Labrador-Retriever.jpg?v=1749566503&width=550');"></div>
+<h3>Max</h3>
+<p>Labrador • 2 Years</p>
+</div>
+<div class="pet-card highlight">
+ <div class="pet-img-placeholder" style="background-image: url('https://media.istockphoto.com/id/1409515292/photo/white-persian-cat.jpg?s=612x612&w=0&k=20&c=1JvGqAS88IakPZhvfjdeWmMReK0lNyUohvA2cK6qyvM=');"></div>
+<h3>Oliver</h3>
+<p>Tabby Cat • 2 Years</p>
 
-  <div class="home-right">
-    IMAGE
-  </div>
+</div>
+<div class="pet-card">
+<div class="pet-img-placeholder" style="background-image: url('https://drloudon.com/wp-content/uploads/2022/05/skin-allergies.jpg');"></div>
+<h3>Bella</h3>
+<p>Beagle • 3 Years</p>
 </div>
 
-<!-- SIGN UP -->
-<div class="signup">
-  <h3>Become a member today</h3>
-  <button onclick="signup()">Sign Up ></button>
+<a href="signUp.html" class="learn-button">Learn More</a> 
+
+ </div>
 </div>
+</section>
 
-<!-- FEATURED -->
-<div class="featured" id="featured">
-  <h3>Featured Pets (Gallery)</h3>
-
-  <div class="carousel">
-    <button onclick="prev()">⬅</button>
-
-    <div id="pet-container"></div>
-
-    <button onclick="next()">➡</button>
-  </div>
-
-  <button>Learn More</button>
+Adoption Stories 
+<section class="stories-section">
+<div class="container">
+<h2>Heartwarming Success Stories</h2>
+<details>
+<summary>Max </summary>
+<p>Five days ago, a man came to our shelter looking for a small dog. While waiting to meet one, a volunteer brought out a 60-pound, shy dog found in the woods. This dog, Max, walked straight up to the man, put his front legs on his lap, and looked at him. "So much for a small dog," the man thought. Max had been at the shelter for three months, but he instantly found his forever home that day.</p>
+</details>
+<details>
+<summary>The Journey of Luna the Cat</summary>
+<p>Luna waited 6 months for a home, but now she has a sunny windowsill of her very own.</p>
+</details>
+<details>
+<summary>Bella's New Beginning</summary>
+<p>A senior dog found a peaceful retirement home thanks to our Fur-Ever Friends community.</p>
+ </details>
 </div>
-
-<!-- STORIES -->
-<div class="stories">
-  <h3>Top Adoption Stories</h3>
-
-  <div class="story" onclick="toggleStory(this)">
-    Story 1
-    <div class="hidden">Details...</div>
-  </div>
-
-  <div class="story" onclick="toggleStory(this)">
-    Story 2
-    <div class="hidden">Details...</div>
-  </div>
-
-  <div class="story" onclick="toggleStory(this)">
-    Story 3
-    <div class="hidden">Details...</div>
-  </div>
-</div>
-
+</section>
 <!-- SUPPORT -->
-<div class="support">
-  <div class="box">
-    <p>Adopt</p>
-    <button onclick="alert('Adopt')">Learn More</button>
-  </div>
-
-  <div class="box">
-    <p>Donate</p>
-    <button onclick="alert('Donate')">Learn More</button>
-  </div>
-
-  <div class="box">
-    <p>Volunteer</p>
-    <button onclick="alert('Volunteer')">Learn More</button>
-  </div>
+<!-- 6. Support Us Cards -->
+<section class="support-us">
+<div class="action-card adopt">
+<h3>Adopt</h3>
+<p>Give a pet a second chance at life.</p>
+<button class="card-btn">Get Started</button>
 </div>
+<div class="action-card donate">
+<h3>Donate</h3>
+<p>Help us fund medical care and food.</p>
+<button class="card-btn">Give Now</button>
+</div>
+<div class="action-card volunteer">
+<h3>Volunteer</h3>
+<p>Spend time helping our animals daily.</p>
+<button class="card-btn">Join Us</button>
+</div>
+</section>
 
 <!-- CARE -->
-<div class="care">
-  <h3>How to care for a pet?</h3>
-
+<section class="care">
+  <h2>How to care for a pet?</h2>
   <div class="links">
-    <div>Link</div>
-    <div>Link</div>
-    <div>Link</div>
-    <div>Link</div>
+    <a href="#">Feeding Guide</a>
+    <a href="#">Training</a>
+    <a href="#">Health</a>
+    <a href="#">Grooming</a>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
-<div class="footer">
-  <p>Fur-Ever Friends | Contact Info | Social Media</p>
-</div>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section brand">
+      <h2 class="brand-name">Fur-Ever Friends</h2>
+      <p>Finding you your purrfect fur-ever friend!</p>
+    </div>
+    
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="supportus.html">Support Us</a></li>
+      </ul>
+    </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+    <div class="footer-section contact">
+      <h3>Contact</h3>
+      <p>Email: furever.friends@gmail.com</p>
+      <p>Location: Trinidad & Tobago</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 Fur-Ever Friends. All rights reserved.</p>
+  </div>
+</footer>
+
